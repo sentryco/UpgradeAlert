@@ -80,12 +80,12 @@ extension UpgradeAlert {
       let alertController = UIAlertController(title: alertTitle, message: alertMessage(appInfo.version), preferredStyle: .alert)
       if !isRequired { // aka withConfirmation
          let notNowButton = UIAlertAction(title: laterButtonTitle, style: .default) { (action: UIAlertAction) in
-            complete(.notNow)
+            complete?(.notNow)
          }
          alertController.addAction(notNowButton)
       }
       let updateButton = UIAlertAction(title: updateButtonTitle, style: .default) { (action: UIAlertAction) in
-         UIApplication.shared.open(appStoreURL, options: [:], completionHandler: { complete(.didOpenAppStoreToUpdate) })
+         UIApplication.shared.open(appStoreURL, options: [:], completionHandler: { _ in complete?(.didOpenAppStoreToUpdate) })
       }
       alertController.addAction(updateButton)
       alertController.present()
