@@ -1,0 +1,9 @@
+import Foundation
+/**
+ * - Remark: it's possible to get more info like rating, release date, release notes etc etc see here: https://github.com/amebalabs/AppVersion/blob/master/AppVersion/Source/AppStoreVersion.swift
+ */
+public struct AppInfo: Decodable {
+   let version: String
+   let trackViewUrl: String
+}
+
