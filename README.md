@@ -1,6 +1,8 @@
 ![mit](https://img.shields.io/badge/License-MIT-brightgreen.svg)
 ![platform](https://img.shields.io/badge/Platform-iOS/macOS-blue.svg)
 [![SPM compatible](https://img.shields.io/badge/SPM-compatible-4BC51D.svg?style=flat)](https://github.com/apple/swift)
+[![Tests](https://github.com/sentryco/UpgradeAlert/actions/workflows/Tests.yml/badge.svg)](https://github.com/sentryco/UpgradeAlert/actions/workflows/Tests.yml)
+[![codebeat badge](https://codebeat.co/badges/3cf70bb0-e669-4ad2-b772-e76175cd23c1)](https://codebeat.co/projects/github-com-sentryco-upgradealert-main)
 
 # 🔔 UpgradeAlert
 
