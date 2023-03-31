@@ -6,4 +6,3 @@ public struct AppInfo: Decodable {
    let version: String
    let trackViewUrl: String
 }
-

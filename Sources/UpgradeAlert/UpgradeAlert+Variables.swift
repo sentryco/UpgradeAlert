@@ -3,7 +3,7 @@ import Foundation
  * Variables
  */
 extension UpgradeAlert {
-   public static var isRequired: Bool = false // isSkippable, encouraged // Boolean flag if selected means this is going to be a force upgrade. If not selected indicates it's not a force upgrade.
+   public static var isRequired = false // isSkippable, encouraged // Boolean flag if selected means this is going to be a force upgrade. If not selected indicates it's not a force upgrade.
    public static var updateButtonTitle: String = "Update Available"
    public static var laterButtonTitle: String = "Not now"
    // - Fixme: ⚠️️ rename to title

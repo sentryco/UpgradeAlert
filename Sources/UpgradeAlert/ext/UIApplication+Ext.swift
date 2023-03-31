@@ -8,8 +8,8 @@ extension UIApplication {
    public static func openAppStore(appId: String) {
       if let url = URL(string: "https://apps.apple.com/app/id\(appId)"),
          UIApplication.shared.canOpenURL(url) {
-         UIApplication.shared.open(url, options: [:]) { (opened) in
-            if(opened){
+         UIApplication.shared.open(url, options: [:]) { opened in
+            if opened {
                debugPrint("App Upgrade: Opened App Store.")
             }
          }

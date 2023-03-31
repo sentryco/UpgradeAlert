@@ -8,7 +8,7 @@ let package = Package(
     products: [
         .library(
             name: "UpgradeAlert",
-            targets: ["UpgradeAlert"]),
+            targets: ["UpgradeAlert"])
     ],
     dependencies: [],
     targets: [
@@ -17,6 +17,6 @@ let package = Package(
             dependencies: []),
         .testTarget(
             name: "UpgradeAlertTests",
-            dependencies: ["UpgradeAlert"]),
+            dependencies: ["UpgradeAlert"])
     ]
 )

@@ -16,7 +16,7 @@ extension NSAlert {
       if let cancelTitle = cancelTitle { alert.addButton(withTitle: cancelTitle) }
       if let win: NSWindow = view?.window ?? NSApplication.shared.windows.first {
          alert.beginSheetModal(for: win, completionHandler: { (modalResponse: NSApplication.ModalResponse) -> Void in
-            if(modalResponse == .alertFirstButtonReturn){
+            if modalResponse == .alertFirstButtonReturn {
                complete?(true)
             } else {
                complete?(false)

@@ -25,7 +25,7 @@ extension UpgradeAlert {
     */
 	public static func checkForUpdates(complete: Complete? = defaultComplete) { // complete: (_ appInfo: AppInfo?, error: NSError?)
 		DispatchQueue.global(qos: .background).async { // network calls goes on the background thread
-         getAppInfo { (appInfo, error) in
+         getAppInfo { appInfo, error in
             guard let localVersion: String = Bundle.version, error == nil else { complete?(.error(error: error ?? .bundleErr(desc: "Err, bundle.version"))); return } // guard let currentVersion: String = Bundle.version else { throw NSError(domain: "Err, bundle", code: 0) }
             guard let appInfo: AppInfo = appInfo, error == nil else { complete?(.error(error: error ?? .invalidResponse(description: "Err, no appInfo"))); return }
 				let needsUpdate: Bool = ComparisonResult.compareVersion(current: localVersion, appStore: appInfo.version) == .requiresUpgrade
@@ -33,8 +33,8 @@ extension UpgradeAlert {
 				DispatchQueue.main.async {  // UI goes on the main thread
 					Self.showAlert(appInfo: appInfo, complete: complete)
 				}
-			} // call network
-      }
+         } // call network
+		}
 	}
 }
 /**
@@ -51,7 +51,7 @@ extension UpgradeAlert {
     */
    private static func getAppInfo(completion: ((AppInfo?, UAError?) -> Void)?) { /*urlStr: String, */
       guard let url: URL = requestURL else { completion?(nil, UAError.invalideURL); return }
-      let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+      let task = URLSession.shared.dataTask(with: url) { data, _, error in
          do {
             guard let data = data, error == nil else { throw NSError(domain: error?.localizedDescription ?? "data not available", code: 0) }
             let result = try JSONDecoder().decode(LookupResult.self, from: data)
@@ -79,12 +79,12 @@ extension UpgradeAlert {
       guard let appStoreURL: URL = .init(string: appInfo.trackViewUrl) else { complete?(.error(error: .invalidAppStoreURL)); return } // Needed when opeing the app in appstore
       let alertController = UIAlertController(title: alertTitle, message: alertMessage(appInfo.version), preferredStyle: .alert)
       if !isRequired { // aka withConfirmation
-         let notNowButton = UIAlertAction(title: laterButtonTitle, style: .default) { (action: UIAlertAction) in
+         let notNowButton = UIAlertAction(title: laterButtonTitle, style: .default) { (_: UIAlertAction) in
             complete?(.notNow)
          }
          alertController.addAction(notNowButton)
       }
-      let updateButton = UIAlertAction(title: updateButtonTitle, style: .default) { (action: UIAlertAction) in
+      let updateButton = UIAlertAction(title: updateButtonTitle, style: .default) { (_: UIAlertAction) in
          UIApplication.shared.open(appStoreURL, options: [:], completionHandler: { _ in complete?(.didOpenAppStoreToUpdate) })
       }
       alertController.addAction(updateButton)
