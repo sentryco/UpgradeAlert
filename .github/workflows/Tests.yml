@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ main ]
 jobs:
-  SwiftLint:
+  SwiftLint: ## Adds swift-linting to GH actions
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
