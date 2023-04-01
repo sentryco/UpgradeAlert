@@ -29,11 +29,13 @@
 import UpgradeAlert
 
 guard Bundle.isBeta else { Swift.print("App is beta or simulator, skip checking for update"); return }
-UpgradeAlert.isRequired = true // Require users to update
-UpgradeAlert.title = "Update required" // alert title
-UpgradeAlert.message = { version in "Version: \(version) is out!" } // alert msg
-UpgradeAlert.laterButtonTitle = "Later" // skip button title
-UpgradeAlert.updateButtonTitle = "Update Now" // go to appstore btn
+UpgradeAlert.config = UACOnfig( // Config the alert
+   isRequired: false, // Require users to update
+   alertTitle: "Update required", // alert title
+   alertMessage: { version in "Version: \(version) is out!" }, // alert msg
+   laterButtonTitle: "Later", // skip button title
+   updateButtonTitle: "Update Now" // go to appstore btn
+)
 UpgradeAlert.checkForUpdates { outcome in // check apple endpoint if there is a new update
    if case .err(let err) = outcome {
       Swift.print("Err: \(err.localizedDescription)")

@@ -10,11 +10,6 @@ final class UpgradeAlertTests: XCTestCase {
     */
    func testExample() throws {
       guard Bundle.isBeta else { Swift.print("App is beta or simulator, skip checking for update"); return }
-      UpgradeAlert.isRequired = false // Require users to update
-      UpgradeAlert.alertTitle = "Update required" // alert title
-      UpgradeAlert.alertMessage = { version in "Version: \(version) is out!" } // alert msg
-      UpgradeAlert.laterButtonTitle = "Later" // skip button title
-      UpgradeAlert.updateButtonTitle = "Update Now" // go to appstore btn
       UpgradeAlert.checkForUpdates { outcome in // check apple endpoint if there is a new update
          if case .error(let err) = outcome {
             Swift.print("Err: \(err.localizedDescription)")
