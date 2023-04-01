@@ -62,3 +62,4 @@ UpgradeAlert.checkForUpdates { outcome in // check apple endpoint if there is a 
 - Maybe add 1 day delay to showing update alert: to avoid an issue where Apple updates the JSON faster than the app binary propogates to the App Store. https://github.com/amebalabs/AppVersion/blob/master/AppVersion/Source/%20Extensions/Date%2BAppVersion.swift
 - Doc params
 - Clean up comments
+- add screenshot from a test app?

@@ -77,6 +77,7 @@ extension UpgradeAlert {
     * - Fixme: ⚠️️ Unify alert code? one call etc? See AlertKind for inspo etc
     */
    public static func showAlert(appInfo: AppInfo, complete: Complete? = defaultComplete) { // Fix mark ios
+      Swift.print("showAlert")
       #if os(iOS)
       let alert = UIAlertController(title: alertTitle, message: alertMessage(appInfo.version), preferredStyle: .alert)
       if !isRequired { // aka withConfirmation

@@ -8,8 +8,7 @@ extension UIApplication {
     * - Remark: Key Scene can be found by doing `keyWin.windowScene`
     */
    internal var keyWin: UIWindow? {
-      UIApplication
-         .shared
+      self
          .connectedScenes
          .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
          .first { $0.isKeyWindow }
