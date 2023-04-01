@@ -22,6 +22,7 @@ extension UpgradeAlert {
     * - Remark: Version of the app you want to mark for the update. For example, 1.0.0 // This is the version you want the user to force upgrade to a newer version.
     * - Fixme: ⚠️️ Add onAppStoreOpenComplete -> ability to track how many update etc
     * - Fixme: ⚠️️ Use Result instead etc
+    * - Parameter complete: - Fixme: ⚠️️ add doc
     */
 	public static func checkForUpdates(complete: Complete? = defaultComplete) { // complete: (_ appInfo: AppInfo?, error: NSError?)
 		DispatchQueue.global(qos: .background).async { // network calls goes on the background thread
@@ -48,6 +49,7 @@ extension UpgradeAlert {
     * - Note: https://medium.com/usemobile/get-app-version-from-app-store-and-more-e43c5055156a
     * - Note: Discussing this solution: https://stackoverflow.com/questions/6256748/check-if-my-app-has-a-new-version-on-appstore
     * - Fixme: ⚠️️ add timeout interval and local chache pollacy: https://github.com/amebalabs/AppVersion/blob/master/AppVersion/Source/AppStoreVersion.swift
+    * - Parameter completion: - Fixme: ⚠️️ add doc
     */
    private static func getAppInfo(completion: ((AppInfo?, UAError?) -> Void)?) { /*urlStr: String, */
       guard let url: URL = requestURL else { completion?(nil, UAError.invalideURL); return }
@@ -75,18 +77,21 @@ extension UpgradeAlert {
     * - Remark: Can be used. "https://apps.apple.com/app/id\(appId)"
     * - Remark: This is public so that we can debug it before the app is released etc
     * - Fixme: ⚠️️ Unify alert code? one call etc? See AlertKind for inspo etc
+    * - Parameters:
+    *   - appInfo: - Fixme: ⚠️️ add doc
+    *   - complete: - Fixme: ⚠️️ add doc
     */
    public static func showAlert(appInfo: AppInfo, complete: Complete? = defaultComplete) { // Fix mark ios
-      Swift.print("showAlert")
+      // Swift.print("showAlert")
       #if os(iOS)
-      let alert = UIAlertController(title: alertTitle, message: alertMessage(appInfo.version), preferredStyle: .alert)
-      if !isRequired { // aka withConfirmation
-         let notNowButton = UIAlertAction(title: laterButtonTitle, style: .default) { (_: UIAlertAction) in
+      let alert = UIAlertController(title: config.alertTitle, message: config.alertMessage(nil, appInfo.version), preferredStyle: .alert)
+      if !config.isRequired { // aka withConfirmation
+         let notNowButton = UIAlertAction(title: config.laterButtonTitle, style: .default) { (_: UIAlertAction) in
             complete?(.notNow)
          }
          alert.addAction(notNowButton)
       }
-      let updateButton = UIAlertAction(title: updateButtonTitle, style: .default) { (_: UIAlertAction) in
+      let updateButton = UIAlertAction(title: config.updateButtonTitle, style: .default) { (_: UIAlertAction) in
          guard let appStoreURL: URL = .init(string: appInfo.trackViewUrl) else { complete?(.error(error: .invalidAppStoreURL)); return } // Needed when opeing the app in appstore
          guard UIApplication.shared.canOpenURL(appStoreURL) else { Swift.print("err, can't open url"); return }
          UIApplication.shared.open(appStoreURL, options: [:], completionHandler: { _ in complete?(.didOpenAppStoreToUpdate) })
@@ -94,7 +99,7 @@ extension UpgradeAlert {
       alert.addAction(updateButton)
       alert.present()
       #elseif os(macOS)
-      NSAlert.present(question: alertTitle, text: alertMessage(appInfo.version), okTitle: updateButtonTitle, cancelTitle: isRequired ? nil : laterButtonTitle) { answer in
+      NSAlert.present(question: config.alertTitle, text: config.alertMessage(nil, appInfo.version), okTitle: config.updateButtonTitle, cancelTitle: config.isRequired ? nil : config.laterButtonTitle) { answer in
          Swift.print("answer: \(answer)")
          if answer == true {
             guard let appStoreURL: URL = .init(string: "macappstore://showUpdatesPage") else { complete?(.error(error: .invalidAppStoreURL)); return } // "macappstore://itunes.apple.com/app/id403961173?mt=12"

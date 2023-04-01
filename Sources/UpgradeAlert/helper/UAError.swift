@@ -8,4 +8,4 @@ public enum UAError: Error {
    case invalidResponse(description: String)
    case bundleErr(desc: String)
 }
-// maybe just have two? invalidBundleInfo, invalidResponse
+// - Fixme: ⚠️️ maybe just have two? invalidBundleInfo, invalidResponse
