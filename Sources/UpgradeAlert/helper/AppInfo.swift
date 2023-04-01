@@ -4,6 +4,10 @@ import Foundation
  * - Fixme: ⚠️️ rename to UAAppInfo?
  */
 public struct AppInfo: Decodable {
-   let version: String
-   let trackViewUrl: String
+   public let version: String
+   public let trackViewUrl: String
+   public init(version: String, trackViewUrl: String) {
+      self.version = version
+      self.trackViewUrl = trackViewUrl
+   }
 }

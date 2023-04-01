@@ -1,21 +1,19 @@
 #if os(iOS)
 import UIKit
-
+/**
+ * Window and status-bar (iOS 15 etc)
+ */
 extension UIApplication {
    /**
-    * open appstore
+    * - Remark: Key Scene can be found by doing `keyWin.windowScene`
     */
-   public static func openAppStore(appId: String) {
-      if let url = URL(string: "https://apps.apple.com/app/id\(appId)"),
-         UIApplication.shared.canOpenURL(url) {
-         UIApplication.shared.open(url, options: [:]) { opened in
-            if opened {
-               debugPrint("App Upgrade: Opened App Store.")
-            }
-         }
-      } else {
-         Swift.print("App Upgrade: Can't Open App Store on Simulator.")
-      }
+   internal var keyWin: UIWindow? {
+      UIApplication
+         .shared
+         .connectedScenes
+         .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
+         .first { $0.isKeyWindow }
    }
 }
 #endif
+

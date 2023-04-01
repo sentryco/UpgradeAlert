@@ -56,7 +56,9 @@ UpgradeAlert.checkForUpdates { outcome in // check apple endpoint if there is a 
 **A:**  Upgrade-Wall can be implemented with two strategies, hard and soft Upgrade-Walls. A Hard Upgrade-Wall completely restricts the users from using the app and requires them to update the app. A Soft Upgrade-Wall offers greater flexibility to users, generally giving users the freedom to either update the app or skip the update to a later time. Both the strategies can be implemented by showing a popup/alert to users. When the user opens the app, Hard Upgrade-Wall will show a non-dismissible popup with only an update button. Users cannot skip the popup and will have only one option to update the app. On pressing the update button the app should open the play store or AppStore of the app from where the user can update the app to the latest version. Soft Upgrade-Wall will show a dismissible popup to the user with options to either update the app or skip. Users can skip and continue using the app. An example of Hard Upgrade-Wall and Soft Upgrade-Wall. You can skip the pain of building an Upgrade-Wall yourself and use solutions which are already there.
 
 ### Todo:
-- Add country-code to json. br -> brazil etc. (later)
+- Add country-code to json. en -> english etc. (later)
 - Add localization support
 - Add support for: SKStoreProductViewController allowing the update to be initiated in-app. see https://github.com/rwbutler/Updates/ for code
 - Maybe add 1 day delay to showing update alert: to avoid an issue where Apple updates the JSON faster than the app binary propogates to the App Store. https://github.com/amebalabs/AppVersion/blob/master/AppVersion/Source/%20Extensions/Date%2BAppVersion.swift
+- Doc params
+- Clean up comments
