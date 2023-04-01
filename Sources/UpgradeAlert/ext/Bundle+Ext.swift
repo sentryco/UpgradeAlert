@@ -18,14 +18,17 @@ extension Bundle {
     */
    public static var isBeta: Bool { // isSimulatorOrTestFlight
       guard let path = Bundle.main.appStoreReceiptURL?.path else {
-         Swift.print("appStoreReceiptURL not found")
+         Swift.print("isBeta - appStoreReceiptURL not found")
          return false
       }
-      Swift.print("path: \(path)")
-      return path.contains("CoreSimulator") || path.contains("sandboxReceipt")
+//      Swift.print("isBeta - path: \(path)")
+      let isSimulator: Bool = path.contains("CoreSimulator") // can also use #if !targetEnvironment(simulator)  #else #endif here
+//      Swift.print("isSimulator:  \(isSimulator)")
+      let isTestFlight: Bool = path.contains("sandboxReceipt")
+//      Swift.print("isTestFlight:  \(isTestFlight)")
+      return isSimulator || isTestFlight
    }
 }
-
 /**
  * Generates version from bundle
  * fix use the bundle version code from  get version from bundle. See DBLib, seclib, etc
