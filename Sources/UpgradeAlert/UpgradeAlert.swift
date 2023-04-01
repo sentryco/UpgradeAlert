@@ -74,7 +74,10 @@ extension UpgradeAlert {
     * Example code for iOS: mark with os fence
     * - Remark: For macOS it coud be wise to add some comment regarding setting system-wide autoupdate to avoid future alert popups etc
     * - Remark: Can be used: "itms-apps://itunes.apple.com/app/\(appId)")
+    * - Remark: "itms-apps://itunes.apple.com/app/apple-store/id375380948?mt=8"
     * - Remark: Can be used. "https://apps.apple.com/app/id\(appId)"
+    * - Note: https://stackoverflow.com/a/2337601/5389500
+    * - Fixme: ⚠️️ use SKStoreProductViewController?
     * - Remark: This is public so that we can debug it before the app is released etc
     * - Fixme: ⚠️️ Unify alert code? one call etc? See AlertKind for inspo etc
     * - Parameters:
@@ -87,11 +90,13 @@ extension UpgradeAlert {
       let alert = UIAlertController(title: config.alertTitle, message: config.alertMessage(nil, appInfo.version), preferredStyle: .alert)
       if !config.isRequired { // aka withConfirmation
          let notNowButton = UIAlertAction(title: config.laterButtonTitle, style: .default) { (_: UIAlertAction) in
+            Swift.print("not now action")
             complete?(.notNow)
          }
          alert.addAction(notNowButton)
       }
       let updateButton = UIAlertAction(title: config.updateButtonTitle, style: .default) { (_: UIAlertAction) in
+         Swift.print("update action")
          guard let appStoreURL: URL = .init(string: appInfo.trackViewUrl) else { complete?(.error(error: .invalidAppStoreURL)); return } // Needed when opeing the app in appstore
          guard UIApplication.shared.canOpenURL(appStoreURL) else { Swift.print("err, can't open url"); return }
          UIApplication.shared.open(appStoreURL, options: [:], completionHandler: { _ in complete?(.didOpenAppStoreToUpdate) })

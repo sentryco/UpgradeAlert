@@ -23,7 +23,7 @@ extension UpgradeAlert {
     */
    public typealias AlertMessage = (_ appName: String?, _ version: String) -> String
    public typealias Complete = (_ outcome: UAOutcome) -> Void
-   public static let defaultComplete: Complete = { _ in }
+   public static let defaultComplete: Complete = { outcome in Swift.print("default complete - outcome: \(String(describing: outcome))")}
 }
 /**
  * Setter
