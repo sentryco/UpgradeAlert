@@ -6,7 +6,7 @@ import Foundation
  */
 public struct AppInfo: Decodable {
    public let version: String
-   public let trackViewUrl: String
+   public let trackViewUrl: String // make this optional? since macOS might not use it?
    /**
     * - Parameters:
     *   - version: - Fixme: ⚠️️ add doc
