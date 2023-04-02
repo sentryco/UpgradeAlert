@@ -76,10 +76,12 @@ extension UpgradeAlert {
     * - Remark: Can be used: "itms-apps://itunes.apple.com/app/\(appId)")
     * - Remark: "itms-apps://itunes.apple.com/app/apple-store/id375380948?mt=8"
     * - Remark: Can be used. "https://apps.apple.com/app/id\(appId)"
+    * - Remark: This is public so that we can debug it before the app is released etc
     * - Note: https://stackoverflow.com/a/2337601/5389500
     * - Fixme: ⚠️️ use SKStoreProductViewController?
-    * - Remark: This is public so that we can debug it before the app is released etc
     * - Fixme: ⚠️️ Unify alert code? one call etc? See AlertKind for inspo etc
+    * ## Examples:
+    * UpgradeAlert.showAlert(appInfo: .init(version: "1.0.1", trackViewUrl: "https://apps.apple.com/app/id/com.MyCompany.MyApp")) // UA prompt alert test. so we can see how it looks etc.
     * - Parameters:
     *   - appInfo: - Fixme: ⚠️️ add doc
     *   - complete: - Fixme: ⚠️️ add doc
@@ -90,13 +92,13 @@ extension UpgradeAlert {
       let alert = UIAlertController(title: config.alertTitle, message: config.alertMessage(nil, appInfo.version), preferredStyle: .alert)
       if !config.isRequired { // aka withConfirmation
          let notNowButton = UIAlertAction(title: config.laterButtonTitle, style: .default) { (_: UIAlertAction) in
-            Swift.print("not now action")
+//            Swift.print("not now action")
             complete?(.notNow)
          }
          alert.addAction(notNowButton)
       }
       let updateButton = UIAlertAction(title: config.updateButtonTitle, style: .default) { (_: UIAlertAction) in
-         Swift.print("update action")
+//         Swift.print("update action")
          guard let appStoreURL: URL = .init(string: appInfo.trackViewUrl) else { complete?(.error(error: .invalidAppStoreURL)); return } // Needed when opeing the app in appstore
          guard UIApplication.shared.canOpenURL(appStoreURL) else { Swift.print("err, can't open url"); return }
          UIApplication.shared.open(appStoreURL, options: [:], completionHandler: { _ in complete?(.didOpenAppStoreToUpdate) })
@@ -105,7 +107,7 @@ extension UpgradeAlert {
       alert.present()
       #elseif os(macOS)
       NSAlert.present(question: config.alertTitle, text: config.alertMessage(nil, appInfo.version), okTitle: config.updateButtonTitle, cancelTitle: config.isRequired ? nil : config.laterButtonTitle) { answer in
-         Swift.print("answer: \(answer)")
+//         Swift.print("answer: \(answer)")
          if answer == true {
             guard let appStoreURL: URL = .init(string: "macappstore://showUpdatesPage") else { complete?(.error(error: .invalidAppStoreURL)); return } // "macappstore://itunes.apple.com/app/id403961173?mt=12"
             NSWorkspace.shared.open(appStoreURL) // from here: https://stackoverflow.com/a/5656762/5389500
