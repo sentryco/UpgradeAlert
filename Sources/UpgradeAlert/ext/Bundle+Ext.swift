@@ -16,37 +16,13 @@ extension Bundle {
     * fix: make this a var
     - seems like this can determine if an app is beta: https://developer.apple.com/documentation/appstoreconnectapi/list_all_builds_of_an_app
     */
-   public static var isBeta: Bool { // isSimulatorOrTestFlight
+   public static var isBeta: Bool { // was named: isSimulatorOrTestFlight
       guard let path = Bundle.main.appStoreReceiptURL?.path else {
          Swift.print("isBeta - appStoreReceiptURL not found")
          return false
       }
-//      Swift.print("isBeta - path: \(path)")
       let isSimulator: Bool = path.contains("CoreSimulator") // can also use #if !targetEnvironment(simulator)  #else #endif here
-//      Swift.print("isSimulator:  \(isSimulator)")
       let isTestFlight: Bool = path.contains("sandboxReceipt")
-//      Swift.print("isTestFlight:  \(isTestFlight)")
       return isSimulator || isTestFlight
    }
 }
-/**
- * Generates version from bundle
- * fix use the bundle version code from  get version from bundle. See DBLib, seclib, etc
- fix	use var
- */
- // static func getVersion(key: String) -> String? {
- //     guard let filePath = Bundle.main.path(forResource: "Info", ofType: "plist") else {
- //       fatalError("Couldn't find file 'Info.plist'.")
- //     }
- //     // 2 - Add the file to a dictionary
- //     let plist = NSDictionary(contentsOfFile: filePath)
- //     // Check if the variable on plist exists
- //     guard let value = plist?.object(forKey: key) as? String else {
- //       fatalError("Couldn't find key '\(key)' in 'Info.plist'.")
- //     }
- //     return value
- // }
- // static var appName: String? {
-	//  guard let appName = getBundle(key: "CFBundleName") else { return nil } //Bundle.appName()
-	//  return appName
- // }
