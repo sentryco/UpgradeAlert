@@ -9,18 +9,18 @@
 > Easily update your app
 
 ### Problem:
-- macOS app does not auto update by default, unless user has set this specifically in app-store.
-- iOS auto update by default, but a few might have turned it off.
-- Users might be stuck on old OS. that we no longer support. In that case we need to "soft-brick" the app
-- Supporting 6+ month old app versions in your backend
-- Supporting multiple versions of your app you will result in bloated app code that is hard to iterate on
-- Users will stop complaining about issues that are already fixed in the last update
-- Users will stop giving bad reviews because of errors with old software
-- Avoid crashes by staying compatible with the latest device API changes and platform updates
-- Getting urgent security updates out to as many users as possible as quickly as possible
+- 🖥 macOS app does not auto update by default, unless user has set this specifically in app-store.
+- 📲 iOS auto update by default, but a few might have turned it off.
+- 🕸 Users might be stuck on old OS. that we no longer support. In that case we need to "soft-brick" the app
+- 🗄 Supporting 6+ month old app versions in your backend
+- 🥶 Supporting multiple versions of your app you will result in bloated app code that is hard to iterate on
+- 🤬 Users will stop complaining about issues that are already fixed in the last update
+- 🥵 Users will stop giving bad reviews because of errors with old software
+- 🔥 Avoid crashes by staying compatible with the latest device API changes and platform updates
+- 🚨 Getting urgent security updates out to as many users as possible as quickly as possible
 
 ### Solution:
-- When current app version is outdated. The user is prompted with a link to appstore where the user can update
+- When the current app version is outdated. The user is prompted with a link to appstore where the user can update
 - Two different alerts can be prompted. One where there is an option to update later and one where the user have to update
 - You can customize alert title, message and button text
 
