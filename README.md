@@ -12,7 +12,7 @@
 - 🖥 macOS app does not auto update by default, unless user has set this specifically in app-store.
 - 📲 iOS auto update by default, but a few might have turned it off.
 - 🕸 Users might be stuck on old OS. that we no longer support. In that case we need to "soft-brick" the app
-- 🗄 Supporting 6+ month old app versions in your backend
+- 🪦 Supporting 6+ month old app versions in your backend
 - 🥶 Supporting multiple versions of your app you will result in bloated app code that is hard to iterate on
 - 🤬 Users will stop complaining about issues that are already fixed in the last update
 - 🥵 Users will stop giving bad reviews because of errors with old software
