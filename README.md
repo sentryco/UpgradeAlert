@@ -24,7 +24,7 @@
 - Two different alerts can be prompted. One where there is an option to update later and one where the user have to update
 - You can customize alert title, message and button text
 
-> **Warning**
+> **Warning**  
 > Setting `isRequired = true` bricks the app until it's updated
 
 ### Screenshots:
