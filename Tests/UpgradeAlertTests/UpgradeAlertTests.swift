@@ -4,7 +4,7 @@ import XCTest
 final class UpgradeAlertTests: XCTestCase {
    /**
     * Test parsing json from remote server
-    * - Fixme: ⚠️️ Add code from NTPTime project
+    * - Fixme: ⚠️️ Add exception code from NTPTime project
     * - Fixme: ⚠️️ Needs a window to test this etc
     * - remark: replace url - your url here
     */
@@ -13,7 +13,7 @@ final class UpgradeAlertTests: XCTestCase {
       UpgradeAlert.checkForUpdates { outcome in // check apple endpoint if there is a new update
          if case .error(let err) = outcome {
             Swift.print("Err: \(err.localizedDescription)")
-         } else { // opportunity to track user action here with GA etc
+         } else { // Opportunity to track user action here with GA etc
             Swift.print("Outcome: \(String(describing: outcome))") // notNow, notNeeded, appStoreOpened
          }
       }

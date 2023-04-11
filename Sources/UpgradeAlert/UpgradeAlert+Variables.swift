@@ -30,7 +30,7 @@ extension UpgradeAlert {
  */
 extension UpgradeAlert {
    /**
-    * - Fixme: ⚠️️ add doc
+    * UpgradeAlert config
     */
    public static var config: UAConfig = .defaultConfig
 }

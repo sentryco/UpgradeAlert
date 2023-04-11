@@ -4,7 +4,7 @@ import Foundation
  */
 public struct UAConfig {
    let isRequired: Bool // isSkippable, encouraged // Boolean flag if selected means this is going to be a force upgrade. If not selected indicates it's not a force upgrade.
-   let alertTitle: String // - Fixme: ⚠️️ rename to title
+   let alertTitle: String // - Fixme: ⚠️️ rename to title?
    let alertMessage: UpgradeAlert.AlertMessage // - Fixme: ⚠️️ rename to message?
    let laterButtonTitle: String
    let updateButtonTitle: String

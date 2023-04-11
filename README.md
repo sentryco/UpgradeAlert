@@ -27,12 +27,19 @@
 > **Warning**
 > Setting `isRequired = true` bricks the app until it's updated
 
+
+<img width="405" alt="ios" src="iOS.png">  
+
+**And for macOS:**
+
+<img width="480" alt="ios" src="macOS.png">
+
 ### Example:
 ```swift
 import UpgradeAlert
 
 guard Bundle.isBeta else { Swift.print("App is beta or simulator, skip checking for update"); return }
-UpgradeAlert.config = UACOnfig( // Config the alert
+UpgradeAlert.config = UAConfig( // Config the alert
    isRequired: false, // Require users to update
    alertTitle: "Update required", // alert title
    alertMessage: { version in "Version: \(version) is out!" }, // alert msg
@@ -47,6 +54,12 @@ UpgradeAlert.checkForUpdates { outcome in // check apple endpoint if there is a 
    }
 }
 ```
+**For debugging**
+
+```swift
+// UA prompt alert test. so we can see how it looks etc.
+UpgradeAlert.showAlert(appInfo: .init(version: "1.0.1", trackViewUrl: "https://apps.apple.com/app/id/com.MyCompany.MyApp"))
+```
 
 ### FAQ:
 **Q:** What is an Upgrade-Wall?  
@@ -57,6 +70,9 @@ UpgradeAlert.checkForUpdates { outcome in // check apple endpoint if there is a 
 
 **Q:**  How to Implement Upgrade-Wall?  
 **A:**  Upgrade-Wall can be implemented with two strategies, hard and soft Upgrade-Walls. A Hard Upgrade-Wall completely restricts the users from using the app and requires them to update the app. A Soft Upgrade-Wall offers greater flexibility to users, generally giving users the freedom to either update the app or skip the update to a later time. Both the strategies can be implemented by showing a popup/alert to users. When the user opens the app, Hard Upgrade-Wall will show a non-dismissible popup with only an update button. Users cannot skip the popup and will have only one option to update the app. On pressing the update button the app should open the play store or AppStore of the app from where the user can update the app to the latest version. Soft Upgrade-Wall will show a dismissible popup to the user with options to either update the app or skip. Users can skip and continue using the app. An example of Hard Upgrade-Wall and Soft Upgrade-Wall. You can skip the pain of building an Upgrade-Wall yourself and use solutions which are already there.
+
+### Gotchas:
+- For macOS `applicationDidBecomeActive` will be called after dismissing the UpgradeAlert, make sure you init UpgradeAlert from another method or else it will create an inescapable loop. This does not apply for iOS.
 
 ### Todo:
 - Add country-code to json. en -> english etc. (later)

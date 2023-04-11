@@ -2,7 +2,10 @@
 import UIKit
 
 extension UIAlertController {
-   // - Fixme: ⚠️️ maybe use presentedVC if rootvc has one etc?
+   /**
+    * - Note: sometimes there is no vc: https://stackoverflow.com/a/30509569/5389500
+    * - Fixme: ⚠️️ Maybe use presentedVC if rootvc has one etc?
+    */
    internal func present() {
 //      Swift.print("present")
       let keyWin = UIApplication.shared.keyWin
@@ -11,7 +14,7 @@ extension UIAlertController {
 //      Swift.print("rootVC:  \(String(describing: rootVC))")
       let presentedVC = rootVC?.presentedViewController
 //      Swift.print("presentedVC:  \(presentedVC)")
-      presentedVC?.present(self, animated: true, completion: nil)
+      (presentedVC ?? rootVC)?.present(self, animated: true, completion: nil)
    }
 }
 #endif
