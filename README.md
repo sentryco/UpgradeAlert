@@ -27,10 +27,13 @@
 > **Warning**
 > Setting `isRequired = true` bricks the app until it's updated
 
+### Screenshots:
+
+**For iOS:**
 
 <img width="405" alt="ios" src="iOS.png">  
 
-**And for macOS:**
+**For macOS:**
 
 <img width="480" alt="ios" src="macOS.png">
 
