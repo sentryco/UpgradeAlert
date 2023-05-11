@@ -20,7 +20,7 @@
 - 🚨 Getting urgent security updates out to as many users as possible as quickly as possible
 
 ### Solution:
-- When the current app version is outdated. The user is prompted with a link to appstore where the user can update
+- When the current app version is outdated. The user is prompted with a link to AppStore where the user can update
 - Two different alerts can be prompted. One where there is an option to update later and one where the user have to update
 - You can customize alert title, message and button text
 
@@ -68,11 +68,11 @@ UpgradeAlert.showAlert(appInfo: .init(version: "1.0.1", trackViewUrl: "https://a
 **Q:** What is an Upgrade-Wall?  
 **A:** Upgrade-Wall or Update-Wall is a system/service that prevents mobile app users from using the app who are still using the older versions of the app.
 
-**Q:**  Why do we need Upgrade-Wall?  
+**Q:** Why do we need Upgrade-Wall?  
 **A:** A required upgrade may be required when there are breaking changes in the backend API which will result in an app crash or when there are security issues in older apps and a new version of the app is released and you may want to require users to update to the newly released version. Also in cases where you want to encourage users to update your app to the newly released versions because you have launched a new cool feature and want users to explore and use it. In these scenarios, Upgrade-Wall is necessary to have in place.
 
-**Q:**  How to Implement Upgrade-Wall?  
-**A:**  Upgrade-Wall can be implemented with two strategies, hard and soft Upgrade-Walls. A Hard Upgrade-Wall completely restricts the users from using the app and requires them to update the app. A Soft Upgrade-Wall offers greater flexibility to users, generally giving users the freedom to either update the app or skip the update to a later time. Both the strategies can be implemented by showing a popup/alert to users. When the user opens the app, Hard Upgrade-Wall will show a non-dismissible popup with only an update button. Users cannot skip the popup and will have only one option to update the app. On pressing the update button the app should open the play store or AppStore of the app from where the user can update the app to the latest version. Soft Upgrade-Wall will show a dismissible popup to the user with options to either update the app or skip. Users can skip and continue using the app. An example of Hard Upgrade-Wall and Soft Upgrade-Wall. You can skip the pain of building an Upgrade-Wall yourself and use solutions which are already there.
+**Q:** How to Implement Upgrade-Wall?  
+**A:** Upgrade-Wall can be implemented with two strategies, hard and soft Upgrade-Walls. A Hard Upgrade-Wall completely restricts the users from using the app and requires them to update the app. A Soft Upgrade-Wall offers greater flexibility to users, generally giving users the freedom to either update the app or skip the update to a later time. Both the strategies can be implemented by showing a popup/alert to users. When the user opens the app, Hard Upgrade-Wall will show a non-dismissible popup with only an update button. Users cannot skip the popup and will have only one option to update the app. On pressing the update button the app should open the play store or AppStore of the app from where the user can update the app to the latest version. Soft Upgrade-Wall will show a dismissible popup to the user with options to either update the app or skip. Users can skip and continue using the app. An example of Hard Upgrade-Wall and Soft Upgrade-Wall. You can skip the pain of building an Upgrade-Wall yourself and use solutions which are already there.
 
 ### Gotchas:
 - For macOS `applicationDidBecomeActive` will be called after dismissing the UpgradeAlert, make sure you init UpgradeAlert from another method or else it will create an inescapable loop. This does not apply for iOS.
