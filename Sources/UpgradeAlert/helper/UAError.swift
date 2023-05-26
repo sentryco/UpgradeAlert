@@ -1,6 +1,7 @@
 import Foundation
 /**
- * error type. so we can track if bundle id etc faults.
+ * Error type. so we can track if bundle id etc faults.
+ *  - Fixme: ⚠️️ maybe just have two? invalidBundleInfo, invalidResponse
  */
 public enum UAError: Error {
    case invalidAppStoreURL
@@ -8,4 +9,3 @@ public enum UAError: Error {
    case invalidResponse(description: String)
    case bundleErr(desc: String)
 }
-// - Fixme: ⚠️️ maybe just have two? invalidBundleInfo, invalidResponse

@@ -3,9 +3,17 @@ import Cocoa
 
 extension NSAlert {
    /**
+    * ## Examples:
     * NSAlert.present(question: "Ok?", text: "Choose your answer.") { answer in
     *   print(answer)
     * }
+    * - Parameters:
+    *   - question: - Fixme: ⚠️️ add doc
+    *   - text: - Fixme: ⚠️️ add doc
+    *   - okTitle: - Fixme: ⚠️️ add doc
+    *   - cancelTitle: - Fixme: ⚠️️ add doc
+    *   - view: - Fixme: ⚠️️ add doc
+    *   - complete: - Fixme: ⚠️️ add doc
     */
    internal static func present(question: String, text: String, okTitle: String? = "OK", cancelTitle: String? = "Cancel", view: NSView? = nil, complete: ((_ answer: Bool) -> Void)?) {
       let alert = NSAlert()

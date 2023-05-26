@@ -2,7 +2,7 @@ import Foundation
 /**
  * - Remark: it's possible to get more info like rating, release date, release notes etc etc see here: https://github.com/amebalabs/AppVersion/blob/master/AppVersion/Source/AppStoreVersion.swift
  * - Fixme: ⚠️️ Rename to UAAppInfo?
- * - Fixme: ⚠️️ add doc
+ * - Fixme: ⚠️️ Add doc
  */
 public struct AppInfo: Decodable {
    public let version: String

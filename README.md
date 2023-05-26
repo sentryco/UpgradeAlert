@@ -21,7 +21,7 @@
 
 ### Solution:
 - When the current app version is outdated. The user is prompted with a link to AppStore where the user can update
-- Two different alerts can be prompted. One where there is an option to update later and one where the user have to update
+- Two different alerts can be prompted. One where there is an option to update later and one where the user required to update
 - You can customize alert title, message and button text
 
 > **Warning**  
@@ -78,10 +78,11 @@ UpgradeAlert.showAlert(appInfo: .init(version: "1.0.1", trackViewUrl: "https://a
 - For macOS `applicationDidBecomeActive` will be called after dismissing the UpgradeAlert, make sure you init UpgradeAlert from another method or else it will create an inescapable loop. This does not apply for iOS.
 
 ### Todo:
+- Add screenshot from a test app? ✅ 
+- Add support for testflight. There is a repo in issues with a link to another repo that recently added support for this
 - Add country-code to json. en -> english etc. (later)
 - Add localization support
 - Add support for: SKStoreProductViewController allowing the update to be initiated in-app. see https://github.com/rwbutler/Updates/ for code
 - Maybe add 1 day delay to showing update alert: to avoid an issue where Apple updates the JSON faster than the app binary propogates to the App Store. https://github.com/amebalabs/AppVersion/blob/master/AppVersion/Source/%20Extensions/Date%2BAppVersion.swift
 - Doc params
 - Clean up comments
-- add screenshot from a test app?

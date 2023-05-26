@@ -13,10 +13,10 @@ public struct UAConfig {
     * - Fixme: ⚠️️ change title based on isRequired state?
     * - Parameters:
     *   - isRequired: - Fixme: ⚠️️ add doc
-    *   - alertTitle: - Fixme: ⚠️️ add doc
-    *   - alertMessage: - Fixme: ⚠️️ add doc
-    *   - laterButtonTitle: - Fixme: ⚠️️ add doc
-    *   - updateButtonTitle: - Fixme: ⚠️️ add doc
+    *   - alertTitle: I.e: "New version" or "Update Available"
+    *   - alertMessage: I.e: { appName, version in "Version: \(version) is out!" }
+    *   - laterButtonTitle: I.e: "Not now"
+    *   - updateButtonTitle: I.e: "Update"
     */
    public init(isRequired: Bool, alertTitle: String, alertMessage: @escaping UpgradeAlert.AlertMessage, laterButtonTitle: String, updateButtonTitle: String) {
       self.isRequired = isRequired
@@ -31,7 +31,7 @@ public struct UAConfig {
  */
 extension UAConfig {
    /**
-    * Default config
+    * Default config for the alert
     */
    public static let defaultConfig: UAConfig = {
       .init(
@@ -44,12 +44,8 @@ extension UAConfig {
                return "Version \(version) is available on the AppStore."
             }
          },
-         laterButtonTitle: "Later", // skip button title
-         updateButtonTitle: "Update Now" // go to appstore btn
+         laterButtonTitle: "Later", // Skip button title
+         updateButtonTitle: "Update Now" // Go to appstore btn
       )
    }()
 }
-//"Update Available"
-//"Not now"
-//"New version"
-//{ appName, version in "Version: \(version) is out!" }, // alert msg

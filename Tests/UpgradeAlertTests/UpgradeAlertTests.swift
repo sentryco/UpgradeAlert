@@ -4,7 +4,7 @@ import XCTest
 final class UpgradeAlertTests: XCTestCase {
    /**
     * Test parsing json from remote server
-    * - Fixme: ⚠️️ Add exception code from NTPTime project
+    * - Fixme: ⚠️️ Add exception code from NTPTime repo
     * - Fixme: ⚠️️ Needs a window to test this etc
     * - remark: replace url - your url here
     */

@@ -1,11 +1,11 @@
 import Foundation
 /**
  * - Fixme: ⚠️️ Rename to: notNow, notNeeded, appStoreOpened
- * - Fixme: ⚠️️ add doc
+ * - Fixme: ⚠️️ Add more doc
  */
 public enum UAOutcome {
    case updateNotNeeded
-   case notNow // userDefered
+   case notNow // user-defered
    case didOpenAppStoreToUpdate
    case error(error: UAError)
 }

@@ -5,11 +5,11 @@ import Foundation
 extension UpgradeAlert {
    /**
     * appInfo request url
-    * - Fixme: ⚠️️ rename to appInfoRequestURL?
+    * - Fixme: ⚠️️ Rename to appInfoRequestURL?
     */
    internal static var requestURL: URL? {
-      guard let bundleId = Bundle.identifier else { return nil }
-      let requestURLStr = "https://itunes.apple.com/lookup?bundleId=\(bundleId)" // might need country code
+      guard let bundleId: String = Bundle.identifier else { return nil }
+      let requestURLStr: String = "https://itunes.apple.com/lookup?bundleId=\(bundleId)" // might need country code
       return .init(string: requestURLStr)
    }
 }
@@ -18,8 +18,8 @@ extension UpgradeAlert {
  */
 extension UpgradeAlert {
    /**
-    * - Fixme: ⚠️️ : add appName as a parm as well
-    * - Fixme: ⚠️️ rename to UAAlertMessage?
+    * - Fixme: ⚠️️ Add appName as a parm as well
+    * - Fixme: ⚠️️ Rename to UAAlertMessage?
     */
    public typealias AlertMessage = (_ appName: String?, _ version: String) -> String
    public typealias Complete = (_ outcome: UAOutcome) -> Void

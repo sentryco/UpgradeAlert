@@ -1,7 +1,8 @@
 import Foundation
-
+/**
+ * - Fixme: ⚠️️ there is also displayName
+ */
 extension Bundle {
-   // - Fixme: ⚠️️ there is also displayName
    internal static let name: String? = Bundle.main.object(forInfoDictionaryKey: kCFBundleNameKey as String) as? String
    internal static let version: String? = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
    internal static let build: String? = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String
@@ -14,8 +15,8 @@ extension Bundle {
     * - Note: Another example: https://stackoverflow.com/a/59047187/5389500
     * - Note: Might have become broken in iOS 13
     * - Note: If it fails there might be a fix here: https://stackoverflow.com/a/52232267/5389500
-    * fix: make this a var
-    - seems like this can determine if an app is beta: https://developer.apple.com/documentation/appstoreconnectapi/list_all_builds_of_an_app
+    * - Note: seems like this can determine if an app is beta: https://developer.apple.com/documentation/appstoreconnectapi/list_all_builds_of_an_app
+    * - Fixme: ⚠️️ Make this a var
     */
    public static var isBeta: Bool { // was named: isSimulatorOrTestFlight
       guard let path = Bundle.main.appStoreReceiptURL?.path else {
