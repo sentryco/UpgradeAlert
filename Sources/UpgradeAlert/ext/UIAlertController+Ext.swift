@@ -6,7 +6,6 @@ extension UIAlertController {
     * Present alert
     */
    internal func present() {
-      // Swift.print("present")
       Self.presentedOrRootVC?.present(self, animated: true, completion: nil)
    }
 }
@@ -25,7 +24,7 @@ extension UIAlertController {
       // Swift.print("rootVC:  \(String(describing: rootVC))")
       let presentedVC = rootVC?.presentedViewController
       // Swift.print("presentedVC:  \(presentedVC)")
-      return (presentedVC ?? rootVC)
+      return presentedVC ?? rootVC
    }
 }
 #endif

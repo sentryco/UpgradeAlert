@@ -8,8 +8,8 @@ extension NSAlert {
     *   print(answer)
     * }
     * - Parameters:
-    *   - question: - Fixme: ⚠️️ add doc
-    *   - text: - Fixme: ⚠️️ add doc
+    *   - question: - Fixme: ⚠️️ rename to message
+    *   - text: - Fixme: ⚠️️ rename to title
     *   - okTitle: - Fixme: ⚠️️ add doc
     *   - cancelTitle: - Fixme: ⚠️️ add doc
     *   - view: - Fixme: ⚠️️ add doc
