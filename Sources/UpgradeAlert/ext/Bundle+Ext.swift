@@ -15,8 +15,8 @@ extension Bundle {
     * - Note: Another example: https://stackoverflow.com/a/59047187/5389500
     * - Note: Might have become broken in iOS 13
     * - Note: If it fails there might be a fix here: https://stackoverflow.com/a/52232267/5389500
-    * - Note: seems like this can determine if an app is beta: https://developer.apple.com/documentation/appstoreconnectapi/list_all_builds_of_an_app
-    * - Fixme: ⚠️️ Make this a var
+    * - Note: Seems like this can determine if an app is beta: https://developer.apple.com/documentation/appstoreconnectapi/list_all_builds_of_an_app
+    * - Fixme: ⚠️️  Here is code that checks if something is testflight: https://gist.github.com/lukaskubanek/cbfcab29c0c93e0e9e0a16ab09586996
     */
    public static var isBeta: Bool { // was named: isSimulatorOrTestFlight
       guard let path = Bundle.main.appStoreReceiptURL?.path else {
@@ -28,4 +28,3 @@ extension Bundle {
       return isSimulator || isTestFlight
    }
 }
-
