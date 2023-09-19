@@ -7,13 +7,14 @@ extension NSAlert {
     * NSAlert.present(question: "Ok?", text: "Choose your answer.") { answer in
     *   print(answer)
     * }
+    * Presents an alert to the user.
     * - Parameters:
-    *   - question: - Fixme: ⚠️️ rename to message
-    *   - text: - Fixme: ⚠️️ rename to title
-    *   - okTitle: - Fixme: ⚠️️ add doc
-    *   - cancelTitle: - Fixme: ⚠️️ add doc
-    *   - view: - Fixme: ⚠️️ add doc
-    *   - complete: - Fixme: ⚠️️ add doc
+    *   - message: The main text of the alert.
+    *   - title: The title of the alert.
+    *   - okTitle: The text for the OK button. Defaults to "OK".
+    *   - cancelTitle: The text for the cancel button. Defaults to "Cancel".
+    *   - view: The view to present the alert from. If nil, the alert is presented from the first window of the application.
+    *   - complete: A closure that is called when the user dismisses the alert. The closure takes a single Boolean parameter that is true if the user clicked the OK button and false otherwise.
     */
    internal static func present(question: String, text: String, okTitle: String? = "OK", cancelTitle: String? = "Cancel", view: NSView? = nil, complete: ((_ answer: Bool) -> Void)?) {
       let alert = NSAlert()
