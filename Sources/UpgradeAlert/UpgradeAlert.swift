@@ -4,6 +4,7 @@ import UIKit
 #elseif os(macOS)
 import Cocoa
 #endif
+
 /**
  * - Remark: What if a user doesn't want to update and there is no other option than to update?
  * - Remark: If the app always show popup when getting focus. Then activate flight-mode. Launch the app again.
@@ -22,22 +23,27 @@ extension UpgradeAlert {
     * - Remark: Version of the app you want to mark for the update. For example, 1.0.0 // This is the version you want the user to force upgrade to a newer version.
     * - Fixme: ⚠️️ Add onAppStoreOpenComplete -> ability to track how many update etc
     * - Fixme: ⚠️️ Use Result instead etc
-    * - Parameter complete: - Fixme: ⚠️️ Add doc
+    * - Parameter complete: A closure that is called when the update check is complete. It returns an optional AppInfo object and an optional NSError object. If an error occurs during the update check, the NSError object describes the error. If the update check is successful, the AppInfo object contains information about the app.
     */
 	public static func checkForUpdates(complete: Complete? = defaultComplete) { // complete: (_ appInfo: AppInfo?, error: NSError?)
-		DispatchQueue.global(qos: .background).async { // Network calls goes on the background thread
+		// Perform network calls on a background thread
+		DispatchQueue.global(qos: .background).async { 
          getAppInfo { appInfo, error in
-            guard let localVersion: String = Bundle.version, error == nil else { complete?(.error(error: error ?? .bundleErr(desc: "Err, bundle.version"))); return } // guard let currentVersion: String = Bundle.version else { throw NSError(domain: "Err, bundle", code: 0) }
+            // Fetch app information
+            guard let localVersion: String = Bundle.version, error == nil else { complete?(.error(error: error ?? .bundleErr(desc: "Err, bundle.version"))); return } 
             guard let appInfo: AppInfo = appInfo, error == nil else { complete?(.error(error: error ?? .invalidResponse(description: "Err, no appInfo"))); return }
+            // Check if there is a new version available
 				let needsUpdate: Bool = ComparisonResult.compareVersion(current: localVersion, appStore: appInfo.version) == .requiresUpgrade
 				guard needsUpdate else { complete?(.updateNotNeeded); return } // No update needed, don't prompt user
-				DispatchQueue.main.async {  // UI goes on the main thread
+				// If an update is needed, show an alert on the main thread
+				DispatchQueue.main.async {  
 					Self.showAlert(appInfo: appInfo, complete: complete)
 				}
-         } // Call network
+         } 
 		}
 	}
 }
+
 /**
  * Network
  */
@@ -49,10 +55,13 @@ extension UpgradeAlert {
     * - Note: https://medium.com/usemobile/get-app-version-from-app-store-and-more-e43c5055156a
     * - Note: Discussing this solution: https://stackoverflow.com/questions/6256748/check-if-my-app-has-a-new-version-on-appstore
     * - Fixme: ⚠️️ Add timeout interval and local cache pollacy: https://github.com/amebalabs/AppVersion/blob/master/AppVersion/Source/AppStoreVersion.swift
-    * - Parameter completion: - Fixme: ⚠️️ Add doc, and make alias for type
+    * - Parameter completion: A closure that is called when the app information retrieval is complete. It returns an optional AppInfo object and an optional UAError object. If an error occurs during the retrieval, the UAError object describes the error. If the retrieval is successful, the AppInfo object contains information about the app.
+     - Fixme: ⚠️ make alias for type
     */
    private static func getAppInfo(completion: ((AppInfo?, UAError?) -> Void)?) { /*urlStr: String, */
+      // Check if the request URL is valid
       guard let url: URL = requestURL else { completion?(nil, UAError.invalideURL); return }
+      // Create a data task to fetch app information
       let task = URLSession.shared.dataTask(with: url) { data, _, error in
          do {
             guard let data = data, error == nil else { throw NSError(domain: error?.localizedDescription ?? "data not available", code: 0) }
@@ -60,12 +69,14 @@ extension UpgradeAlert {
             guard let info: AppInfo = result.results.first else { throw NSError(domain: "no app info", code: 0) }
             completion?(info, nil)
          } catch {
+            // Handle potential errors during data fetching and decoding
             completion?(nil, UAError.invalidResponse(description: error.localizedDescription))
          }
       }
       task.resume()
    }
 }
+
 /**
  * Alert
  */
@@ -83,25 +94,28 @@ extension UpgradeAlert {
     * ## Examples:
     * UpgradeAlert.showAlert(appInfo: .init(version: "1.0.1", trackViewUrl: "https://apps.apple.com/app/id/com.MyCompany.MyApp")) // UA prompt alert test. so we can see how it looks etc.
     * - Parameters:
-    *   - appInfo: - Fixme: ⚠️️ add doc
-    *   - complete: called after user press cancel or ok button
+    *   - appInfo:  An AppInfo object that contains information about the app. This information is used to populate the alert.
+    *   - complete: called after user press cancel or ok button ( A closure that is called when the user interacts with the alert. It returns an optional Complete object that describes the user's action (e.g., whether they chose to update now, update later, or encountered an error)
     */
    public static func showAlert(appInfo: AppInfo, complete: Complete? = defaultComplete) { // Fix mark ios
       #if os(iOS)
+      // Create an alert with the app information
       let alert = UIAlertController(title: config.alertTitle, message: config.alertMessage(nil, appInfo.version), preferredStyle: .alert)
       if !config.isRequired { // aka withConfirmation
+         // If the update is not required, add a "Not Now" button
          let notNowButton = UIAlertAction(title: config.laterButtonTitle, style: .default) { (_: UIAlertAction) in
             complete?(.notNow) // not now action
          }
          alert.addAction(notNowButton)
       }
+      // Add an "Update" button that opens the app's page in the App Store
       let updateButton = UIAlertAction(title: config.updateButtonTitle, style: .default) { (_: UIAlertAction) in // update action
          guard let appStoreURL: URL = .init(string: appInfo.trackViewUrl) else { complete?(.error(error: .invalidAppStoreURL)); return } // Needed when opeing the app in appstore
          guard UIApplication.shared.canOpenURL(appStoreURL) else { Swift.print("err, can't open url"); return }
          UIApplication.shared.open(appStoreURL, options: [:], completionHandler: { _ in complete?(.didOpenAppStoreToUpdate) })
       }
       alert.addAction(updateButton)
-      // Swift.print("present \(alert)")
+      // Present the alert
       alert.present()
       #elseif os(macOS)
       NSAlert.present(question: config.alertTitle, text: config.alertMessage(nil, appInfo.version), okTitle: config.updateButtonTitle, cancelTitle: config.isRequired ? nil : config.laterButtonTitle) { answer in
