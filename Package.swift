@@ -19,7 +19,7 @@ let package = Package(
             name: "UpgradeAlertTests",
             dependencies: ["UpgradeAlert"])
     ],
-    swiftLanguageVersions: [.v5],
+    /*swiftLanguageVersions: [.v5],*/
     url: "https://github.com/sentryco/UpgradeAlert",
     description: "A Swift package for showing upgrade alerts."
 )
