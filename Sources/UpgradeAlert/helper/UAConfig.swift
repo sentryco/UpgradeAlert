@@ -1,22 +1,34 @@
 import Foundation
+
 /**
- * Easier config of UA
+ * This struct is used to configure the Upgrade Alert (UA).
+ * It contains all the necessary parameters to customize the alert message.
  */
 public struct UAConfig {
-   let isRequired: Bool // isSkippable, encouraged // Boolean flag if selected means this is going to be a force upgrade. If not selected indicates it's not a force upgrade.
-   let alertTitle: String // - Fixme: ⚠️️ rename to title?
-   let alertMessage: UpgradeAlert.AlertMessage // - Fixme: ⚠️️ rename to message?
+   // Determines whether the upgrade is mandatory or optional.
+   let isRequired: Bool 
+   
+   // The title of the alert.
+   let alertTitle: String 
+   
+   // The message of the alert. It's a function that takes the app name and version as parameters.
+   let alertMessage: UpgradeAlert.AlertMessage 
+   
+   // The title of the button that allows the user to postpone the upgrade.
    let laterButtonTitle: String
+   
+   // The title of the button that initiates the upgrade.
    let updateButtonTitle: String
+
    /**
-    * - Fixme: ⚠️️ add doc
-    * - Fixme: ⚠️️ change title based on isRequired state?
+    * Initializes a new UAConfig with the given parameters.
+    *
     * - Parameters:
-    *   - isRequired: - Fixme: ⚠️️ add doc
-    *   - alertTitle: I.e: "New version" or "Update Available"
-    *   - alertMessage: I.e: { appName, version in "Version: \(version) is out!" }
-    *   - laterButtonTitle: I.e: "Not now"
-    *   - updateButtonTitle: I.e: "Update"
+    *   - isRequired: A boolean indicating whether the upgrade is mandatory.
+    *   - alertTitle: The title of the alert.
+    *   - alertMessage: A function that generates the alert message.
+    *   - laterButtonTitle: The title of the 'Later' button.
+    *   - updateButtonTitle: The title of the 'Update' button.
     */
    public init(isRequired: Bool, alertTitle: String, alertMessage: @escaping UpgradeAlert.AlertMessage, laterButtonTitle: String, updateButtonTitle: String) {
       self.isRequired = isRequired
@@ -26,26 +38,30 @@ public struct UAConfig {
       self.updateButtonTitle = updateButtonTitle
    }
 }
+
 /**
- * Const
+ * Extension of UAConfig to provide a default configuration.
  */
 extension UAConfig {
    /**
-    * Default config for the alert
+    * Provides a default configuration for the alert.
+    * This can be used when no specific configuration is provided.
     */
    public static let defaultConfig: UAConfig = {
       .init(
-         isRequired: false, // Require users to update
-         alertTitle: "Update available", // alert title
+         isRequired: false, // By default, upgrades are not mandatory.
+         alertTitle: "Update available", // Default alert title.
          alertMessage: { appName, version in
             if let appName = appName ?? Bundle.name {
-               return "\(appName) Version \(version) is available on the AppStore." // An optional message which you want to show to the user when user will be alerted for the force update.
+               // Default alert message when app name is available.
+               return "\(appName) Version \(version) is available on the AppStore."
             } else {
+               // Default alert message when app name is not available.
                return "Version \(version) is available on the AppStore."
             }
          },
-         laterButtonTitle: "Later", // Skip button title
-         updateButtonTitle: "Update Now" // Go to appstore btn
+         laterButtonTitle: "Later", // Default 'Later' button title.
+         updateButtonTitle: "Update Now" // Default 'Update' button title.
       )
    }()
 }

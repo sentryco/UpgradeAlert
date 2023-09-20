@@ -8,6 +8,16 @@
 
 > Easily update your app
 
+## Table of Contents
+- [Problem](#problem)
+- [Solution](#solution)
+- [Screenshots](#screenshots)
+- [Example](#example)
+- [FAQ](#faq)
+- [Gotchas](#gotchas)
+- [Todo](#todo)
+- [License](#license)
+
 ### Problem:
 - 🖥 macOS app does not auto update by default, unless user has set this specifically in app-store.
 - 📲 iOS auto update by default, but a few might have turned it off.
@@ -86,3 +96,6 @@ UpgradeAlert.showAlert(appInfo: .init(version: "1.0.1", trackViewUrl: "https://a
 - Maybe add 1 day delay to showing update alert: to avoid an issue where Apple updates the JSON faster than the app binary propogates to the App Store. https://github.com/amebalabs/AppVersion/blob/master/AppVersion/Source/%20Extensions/Date%2BAppVersion.swift
 - Doc params
 - Clean up comments
+
+## License
+This project is licensed under the terms of the MIT license. See the [LICENSE](LICENSE) file.

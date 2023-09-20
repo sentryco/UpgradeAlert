@@ -3,14 +3,16 @@ import Cocoa
 
 extension NSAlert {
    /**
+    * Presents a warning alert to the user with customizable text, buttons, and completion handler.
+    * 
     * ## Examples:
     * NSAlert.present(question: "Ok?", text: "Choose your answer.") { answer in
     *   print(answer)
     * }
-    * Presents an alert to the user.
+    * 
     * - Parameters:
-    *   - message: The main text of the alert.
-    *   - title: The title of the alert.
+    *   - question: The main text of the alert.
+    *   - text: The informative text of the alert.
     *   - okTitle: The text for the OK button. Defaults to "OK".
     *   - cancelTitle: The text for the cancel button. Defaults to "Cancel".
     *   - view: The view to present the alert from. If nil, the alert is presented from the first window of the application.
@@ -21,18 +23,25 @@ extension NSAlert {
       alert.messageText = question
       alert.informativeText = text
       alert.alertStyle = .warning
+      
+      // Add OK button to the alert
       if let okTitle = okTitle { alert.addButton(withTitle: okTitle) }
+      
+      // Add Cancel button to the alert
       if let cancelTitle = cancelTitle { alert.addButton(withTitle: cancelTitle) }
+      
+      // Present the alert from the provided view's window, or from the first window of the application if no view is provided
       if let win: NSWindow = view?.window ?? NSApplication.shared.windows.first {
+         // Begin the alert and handle the user's response in the completion handler
          alert.beginSheetModal(for: win, completionHandler: { (modalResponse: NSApplication.ModalResponse) -> Void in
             if modalResponse == .alertFirstButtonReturn {
-               complete?(true)
+               complete?(true) // User clicked OK
             } else {
-               complete?(false)
+               complete?(false) // User clicked Cancel or closed the alert
             }
          })
       } else {
-         Swift.print("no window")
+         Swift.print("no window") // No window was available to present the alert
       }
    }
 }

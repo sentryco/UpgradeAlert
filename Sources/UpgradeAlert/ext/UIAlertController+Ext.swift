@@ -4,6 +4,7 @@ import UIKit
 extension UIAlertController {
    /**
     * Present alert
+    * fix: throw error if vc is not available?
     */
    internal func present() {
       Self.presentedOrRootVC?.present(self, animated: true, completion: nil)
