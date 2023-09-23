@@ -1,6 +1,5 @@
 #if os(iOS)
 import UIKit
-
 /**
  * Extension to UIApplication to handle window and status-bar related functionalities (iOS 15 etc).
  */
@@ -12,11 +11,9 @@ extension UIApplication {
     */
    internal var keyWin: UIWindow? {
       self
-         .connectedScenes
-         // Flatten the array of windows from each UIWindowScene
-         .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
-         // Find the first window that is the key window
-         .first { $0.isKeyWindow }
+         .connectedScenes // Get the set of connected scenes
+         .flatMap { ($0 as? UIWindowScene)?.windows ?? [] } // Flatten the array of windows from each UIWindowScene
+         .first { $0.isKeyWindow } // Find the first window that is the key window
    }
 }
 #endif

@@ -9,13 +9,15 @@ import Foundation
  * - Fixme: ⚠️️ Add more detailed documentation for this struct and its properties.
  */
 public struct AppInfo: Decodable {
-   // The current version of the application.
+   /**
+    * The current version of the application.
+    */
    public let version: String
-   
-   // The URL to the application's page on the App Store.
-   // This might be optional for macOS applications as they might not have an App Store page.
+   /**
+    * The URL to the application's page on the App Store.
+    * This might be optional for macOS applications as they might not have an App Store page.
+    */
    public let trackViewUrl: String 
-
    /**
     * Initializes a new instance of `AppInfo`.
     * - Parameters:

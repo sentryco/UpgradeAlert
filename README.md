@@ -8,6 +8,13 @@
 
 > Easily update your app
 
+### Description
+- UpgradeAlert is a Swift library that provides an **easy way to prompt users to upgrade** their app to the latest version. 
+- It supports both iOS and macOS platforms and can detect whether the app is running on a simulator or TestFlight. 
+- UpgradeAlert can be **customized with different alert styles**, titles, and button titles. 
+- It also provides a **simple API for checking the current app version** and build number. 
+- UpgradeAlert is available for installation via CocoaPods or Swift Package Manager.
+
 ## Table of Contents
 - [Problem](#problem)
 - [Solution](#solution)
@@ -15,6 +22,7 @@
 - [Example](#example)
 - [FAQ](#faq)
 - [Gotchas](#gotchas)
+- [Installation](#installation)
 - [Todo](#todo)
 - [License](#license)
 
@@ -46,6 +54,23 @@
 **For macOS:**
 
 <img width="480" alt="ios" src="macOS.png">
+
+GitHub Copilot: Sure! Here's an example paragraph about installation using Swift Package Manager (SPM) for the selected README file:
+
+## Installation
+
+UpgradeAlert can be installed using Swift Package Manager. To install, simply add the following line to your `Package.swift` file:
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/amebalabs/UpgradeAlert.git", from: "1.0.0")
+]
+```
+
+Then, run `swift package update` to install the latest version of UpgradeAlert.
+
+Note that UpgradeAlert requires iOS 15 or later, or macOS 12 or later.
+
 
 ### Example:
 ```swift
@@ -99,3 +124,4 @@ UpgradeAlert.showAlert(appInfo: .init(version: "1.0.1", trackViewUrl: "https://a
 
 ## License
 This project is licensed under the terms of the MIT license. See the [LICENSE](LICENSE) file.
+

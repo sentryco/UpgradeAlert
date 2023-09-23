@@ -1,12 +1,14 @@
 import Foundation
 /**
- * * This enum represents the result of a version comparison.
+ * This enum represents the result of a version comparison.
  * It can either be 'compatible' or 'requiresUpgrade'.
- * - Note: very simple and native version compare: https://stackoverflow.com/a/27932531
- * - Note: This has version struct that compares etc: https://stackoverflow.com/questions/70964328/compare-app-versions-after-update-using-decimals-like-2-5-2/70964516#70964516
+ * - Note: The 'compatible' case indicates that the local and remote versions are compatible, while the 'requiresUpgrade' case indicates that the remote version requires an upgrade.
+ * - Note: For more information on version comparison, see: https://stackoverflow.com/a/27932531
+ * - Note: For more advanced version comparison, see: https://stackoverflow.com/questions/70964328/compare-app-versions-after-update-using-decimals-like-2-5-2/70964516#70964516
  */
 public enum ComparisonResult {
-	case compatible, requiresUpgrade
+   case compatible // The local and remote versions are compatible
+   case requiresUpgrade // The remote version requires an upgrade
 }
 extension ComparisonResult {
 	/**

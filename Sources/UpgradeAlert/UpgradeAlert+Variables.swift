@@ -11,9 +11,9 @@ extension UpgradeAlert {
     * - Fixme: ⚠️️ Consider renaming this to appInfoRequestURL for clarity.
     */
    internal static var requestURL: URL? {
-      guard let bundleId: String = Bundle.identifier else { return nil }
-      let requestURLStr: String = "https://itunes.apple.com/lookup?bundleId=\(bundleId)" // might need country code
-      return .init(string: requestURLStr)
+      guard let bundleId: String = Bundle.identifier else { return nil } // Get the bundle identifier of the app, if it's not available, return nil
+      let requestURLStr: String = "https://itunes.apple.com/lookup?bundleId=\(bundleId)" // Create a URL string with the bundle identifier
+      return .init(string: requestURLStr) // Return the URL as a URL object
    }
 }
 /**
@@ -30,7 +30,6 @@ extension UpgradeAlert {
     * - Fixme: ⚠️️ Consider renaming this to UAAlertMessage for consistency.
     */
    public typealias AlertMessage = (_ appName: String?, _ version: String) -> String
-   
    /**
     * Typealias for a completion handler function.
     * - Parameters:
@@ -38,7 +37,6 @@ extension UpgradeAlert {
     * - Note: This function does not return a value.
     */
    public typealias Complete = (_ outcome: UAOutcome) -> Void
-   
    /**
     * Default completion handler function.
     * This function simply prints the outcome of the operation.
