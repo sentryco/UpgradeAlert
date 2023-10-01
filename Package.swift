@@ -20,8 +20,8 @@ let package = Package(
             dependencies: ["UpgradeAlert"]) // Set the test target dependencies
     ]
 )
-    /*,*/
-    /*swiftLanguageVersions: [.v5],*/
-    /*url: "https://github.com/sentryco/UpgradeAlert",*/
-    /*description: "A Swift package for showing upgrade alerts."*/
-)
+/*,*/
+/*swiftLanguageVersions: [.v5],*/
+/*url: "https://github.com/sentryco/UpgradeAlert",*/
+/*description: "A Swift package for showing upgrade alerts."*/
+
