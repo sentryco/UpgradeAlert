@@ -1,15 +1,29 @@
 import Foundation
-
 /**
  * This struct is used to configure the Upgrade Alert (UA).
  * It contains all the necessary parameters to customize the alert message.
  */
 public struct UAConfig {
-   let isRequired: Bool // Determines whether the upgrade is mandatory or optional.
-   let alertTitle: String // The title of the alert.
-   let alertMessage: UpgradeAlert.AlertMessage // The message of the alert. It's a function that takes the app name and version as parameters.
-   let laterButtonTitle: String // The title of the button that allows the user to postpone the upgrade.
-   let updateButtonTitle: String // The title of the button that initiates the upgrade.
+   /**
+    * Determines whether the upgrade is mandatory or optional.
+    */
+   let isRequired: Bool 
+   /**
+    * The title of the alert.
+    */
+   let alertTitle: String 
+   /**
+    * The message of the alert. It's a function that takes the app name and version as parameters.
+    */
+   let alertMessage: UpgradeAlert.AlertMessage 
+   /**
+    * The title of the button that allows the user to postpone the upgrade.
+    */
+   let laterButtonTitle: String
+   /**
+    * The title of the button that initiates the upgrade.
+    */
+   let updateButtonTitle: String
    /**
     * Initializes a new UAConfig with the given parameters.
     *
@@ -28,7 +42,6 @@ public struct UAConfig {
       self.updateButtonTitle = updateButtonTitle
    }
 }
-
 /**
  * Extension of UAConfig to provide a default configuration.
  */

@@ -9,11 +9,12 @@ extension UpgradeAlert {
     * - Returns: A URL pointing to the app's information on iTunes.
     * - Note: This URL might need a country code for region-specific apps.
     * - Fixme: ⚠️️ Consider renaming this to appInfoRequestURL for clarity.
+    * - fix: maybe move url to const?
     */
    internal static var requestURL: URL? {
-      guard let bundleId: String = Bundle.identifier else { return nil } // Get the bundle identifier of the app, if it's not available, return nil
-      let requestURLStr: String = "https://itunes.apple.com/lookup?bundleId=\(bundleId)" // Create a URL string with the bundle identifier
-      return .init(string: requestURLStr) // Return the URL as a URL object
+      guard let bundleId: String = Bundle.identifier else { return nil }
+      let requestURLStr: String = "https://itunes.apple.com/lookup?bundleId=\(bundleId)" // might need country code
+      return .init(string: requestURLStr)
    }
 }
 /**
@@ -26,7 +27,6 @@ extension UpgradeAlert {
     *   - appName: The name of the app. This can be nil.
     *   - version: The version of the app.
     * - Returns: A string that is the alert message.
-    * - Fixme: ⚠️️ Consider adding appName as a parameter for more flexibility.
     * - Fixme: ⚠️️ Consider renaming this to UAAlertMessage for consistency.
     */
    public typealias AlertMessage = (_ appName: String?, _ version: String) -> String
@@ -41,7 +41,9 @@ extension UpgradeAlert {
     * Default completion handler function.
     * This function simply prints the outcome of the operation.
     */
-   public static let defaultComplete: Complete = { outcome in Swift.print("default complete - outcome: \(String(describing: outcome))")}
+   public static let defaultComplete: Complete = { outcome in 
+      Swift.print("default complete - outcome: \(String(describing: outcome))")
+   }
 }
 /**
  * Setter

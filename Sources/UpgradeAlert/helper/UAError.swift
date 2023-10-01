@@ -14,7 +14,7 @@ public enum UAError: Error {
    case invalideURL
    /**
     * This error is thrown when the response from a request is invalid.
-    * The description parameter provides more details about the error.
+    * - Parameter description: Provides more details about the error.
     */
    case invalidResponse(description: String)
    /**

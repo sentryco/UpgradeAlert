@@ -1,11 +1,6 @@
 import Foundation
-
 /**
  * This enum represents the possible outcomes of an upgrade alert.
- * - updateNotNeeded: The app is up-to-date, no upgrade is needed.
- * - notNow: The user has chosen to defer the upgrade.
- * - didOpenAppStoreToUpdate: The user has opened the App Store to perform the upgrade.
- * - error: An error occurred during the upgrade process.
  * - Fixme: ⚠️️ Consider renaming the cases to: notNow, notNeeded, appStoreOpened for better clarity.
  * - Fixme: ⚠️️ Add more detailed documentation for each case.
  */
