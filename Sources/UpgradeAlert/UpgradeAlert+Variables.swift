@@ -41,7 +41,7 @@ extension UpgradeAlert {
     * Default completion handler function.
     * This function simply prints the outcome of the operation.
     */
-   public static let defaultComplete: Complete = { outcome in 
+   public static let defaultComplete: Complete = { outcome in
       Swift.print("default complete - outcome: \(String(describing: outcome))")
    }
 }

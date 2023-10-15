@@ -7,15 +7,15 @@ public struct UAConfig {
    /**
     * Determines whether the upgrade is mandatory or optional.
     */
-   let isRequired: Bool 
+   let isRequired: Bool
    /**
     * The title of the alert.
     */
-   let alertTitle: String 
+   let alertTitle: String
    /**
     * The message of the alert. It's a function that takes the app name and version as parameters.
     */
-   let alertMessage: UpgradeAlert.AlertMessage 
+   let alertMessage: UpgradeAlert.AlertMessage
    /**
     * The title of the button that allows the user to postpone the upgrade.
     */

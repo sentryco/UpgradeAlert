@@ -17,7 +17,7 @@ public struct AppInfo: Decodable {
     * The URL to the application's page on the App Store.
     * This might be optional for macOS applications as they might not have an App Store page.
     */
-   public let trackViewUrl: String 
+   public let trackViewUrl: String
    /**
     * Initializes a new instance of `AppInfo`.
     * - Parameters:

@@ -26,7 +26,7 @@ extension UpgradeAlert {
     */
 	public static func checkForUpdates(complete: Complete? = defaultComplete) { // complete: (_ appInfo: AppInfo?, error: NSError?)
 		// Perform network calls on a background thread
-		DispatchQueue.global(qos: .background).async { 
+		DispatchQueue.global(qos: .background).async {
          getAppInfo { appInfo, error in
             // Fetch app information
             guard let localVersion: String = Bundle.version, // Check if local version is available
@@ -48,10 +48,10 @@ extension UpgradeAlert {
                return // Return from the function
             } // No update needed, don't prompt user
 				// If an update is needed, show an alert on the main thread
-				DispatchQueue.main.async {  
+				DispatchQueue.main.async {
 					Self.showAlert(appInfo: appInfo, complete: complete)
 				}
-         } 
+         }
 		}
 	}
 }
@@ -83,7 +83,7 @@ extension UpgradeAlert {
             }
             let result = try JSONDecoder().decode(LookupResult.self, from: data)
             guard let info: AppInfo = result.results.first else { // Get the first app info from the result
-            
+
                throw NSError(domain: "no app info", code: 0) // If there is no app info, throw an NSError with the description "no app info"
             }
             completion?(info, nil)

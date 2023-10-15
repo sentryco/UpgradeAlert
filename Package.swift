@@ -24,4 +24,3 @@ let package = Package(
 /*swiftLanguageVersions: [.v5],*/
 /*url: "https://github.com/sentryco/UpgradeAlert",*/
 /*description: "A Swift package for showing upgrade alerts."*/
-
