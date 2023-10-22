@@ -19,14 +19,14 @@ extension NSAlert {
     *   - complete: A closure that is called when the user dismisses the alert. The closure takes a single Boolean parameter that is true if the user clicked the OK button and false otherwise.
     */
    internal static func present(question: String, text: String, okTitle: String? = "OK", cancelTitle: String? = "Cancel", view: NSView? = nil, complete: ((_ answer: Bool) -> Void)?) {
-      let alert = NSAlert()
+      let alert: NSAlert = .init()
       alert.messageText = question
       alert.informativeText = text
       alert.alertStyle = .warning
       // Add OK button to the alert
-      if let okTitle = okTitle { alert.addButton(withTitle: okTitle) }
+      if let okTitle: String = okTitle { alert.addButton(withTitle: okTitle) }
       // Add Cancel button to the alert
-      if let cancelTitle = cancelTitle { alert.addButton(withTitle: cancelTitle) }
+      if let cancelTitle: String = cancelTitle { alert.addButton(withTitle: cancelTitle) }
       // Present the alert from the provided view's window, or from the first window of the application if no view is provided
       if let win: NSWindow = view?.window ?? NSApplication.shared.windows.first {
          // Begin the alert and handle the user's response in the completion handler
