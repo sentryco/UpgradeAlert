@@ -32,11 +32,11 @@ extension Bundle {
     * fix. we could make BundleError enum BundleError: Error { case appStoreReceiptURLNotFound }
     */
    public static var isBeta: Bool { // was named: isSimulatorOrTestFlight
-      guard let path = Bundle.main.appStoreReceiptURL?.path else {
+      guard let path: String = Bundle.main.appStoreReceiptURL?.path else {
          Swift.print("isBeta - appStoreReceiptURL not found")
          return false
       }
-      let isSimulator: Bool = path.contains("CoreSimulator") // can also use #if !targetEnvironment(simulator)  #else #endif here
+      let isSimulator: Bool = path.contains("CoreSimulator") // Can also use #if !targetEnvironment(simulator)  #else #endif here
       let isTestFlight: Bool = path.contains("sandboxReceipt")
       return isSimulator || isTestFlight
    }

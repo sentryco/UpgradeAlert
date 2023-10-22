@@ -20,7 +20,7 @@ extension ComparisonResult {
     *   - appStore: "1.2.9" The version of the app in the App Store.
     */
    static func compareVersion(current: String, appStore: String) -> ComparisonResult {
-   	let versionCompare = current.compare(appStore, options: .numeric)
+   	let versionCompare/*: ComparisonResult*/ = current.compare(appStore, options: .numeric)
       switch versionCompare {
       case .orderedSame:// The current version is the same as the App Store version.
          //print("same version")

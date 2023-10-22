@@ -18,7 +18,7 @@ final class UpgradeAlertTests: XCTestCase {
          return
       }
       // Call the checkForUpdates function of the UpgradeAlert module and handle the outcome.
-      UpgradeAlert.checkForUpdates { outcome in
+      UpgradeAlert.checkForUpdates { (outcome: UAOutcome) in
          if case .error(let err) = outcome {
             Swift.print("Err: \(err.localizedDescription)")
          } else {

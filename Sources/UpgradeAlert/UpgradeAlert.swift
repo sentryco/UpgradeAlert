@@ -27,7 +27,7 @@ extension UpgradeAlert {
 	public static func checkForUpdates(complete: Complete? = defaultComplete) { // complete: (_ appInfo: AppInfo?, error: NSError?)
 		// Perform network calls on a background thread
 		DispatchQueue.global(qos: .background).async {
-         getAppInfo { appInfo, error in
+         getAppInfo { (appInfo: AppInfo?, error: UAError?) in
             // Fetch app information
             guard let localVersion: String = Bundle.version, // Check if local version is available
                error == nil // Check if there is no error

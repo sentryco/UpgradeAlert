@@ -1,5 +1,4 @@
 import Foundation
-
 /**
  * `LookupResult` is a struct that conforms to the `Decodable` protocol.
  * It is used to parse the JSON response from the Apple App Store API.

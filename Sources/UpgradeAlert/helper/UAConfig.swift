@@ -54,8 +54,8 @@ extension UAConfig {
       .init(
          isRequired: false, // By default, upgrades are not mandatory.
          alertTitle: "Update available", // Default alert title.
-         alertMessage: { appName, version in
-            if let appName = appName ?? Bundle.name {
+         alertMessage: { (appName: String?, version: String) in
+            if let appName: String = appName ?? Bundle.name {
                // Default alert message when app name is available.
                return "\(appName) Version \(version) is available on the AppStore."
             } else {
