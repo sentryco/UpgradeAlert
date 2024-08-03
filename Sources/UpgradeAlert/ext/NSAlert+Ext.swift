@@ -4,7 +4,7 @@ import Cocoa
 extension NSAlert {
    /**
     * Presents a warning alert to the user with customizable text, buttons, and completion handler.
-    * 
+    * - Description: Displays a modal alert dialog on macOS with customizable titles for the buttons and a completion handler to capture the user's response.
     * ## Examples:
     * NSAlert.present(question: "Ok?", text: "Choose your answer.") { answer in
     *   print(answer)
@@ -19,10 +19,10 @@ extension NSAlert {
     *   - complete: A closure that is called when the user dismisses the alert. The closure takes a single Boolean parameter that is true if the user clicked the OK button and false otherwise.
     */
    internal static func present(question: String, text: String, okTitle: String? = "OK", cancelTitle: String? = "Cancel", view: NSView? = nil, complete: ((_ answer: Bool) -> Void)?) {
-      let alert: NSAlert = .init()
-      alert.messageText = question
-      alert.informativeText = text
-      alert.alertStyle = .warning
+      let alert: NSAlert = .init() // Initializes a new NSAlert object.
+      alert.messageText = question // Sets the primary message text of the alert.
+      alert.informativeText = text // Sets the secondary, informative text of the alert.
+      alert.alertStyle = .warning // Sets the alert style to warning, indicating the nature of the alert.
       // Add OK button to the alert
       if let okTitle: String = okTitle { alert.addButton(withTitle: okTitle) }
       // Add Cancel button to the alert
@@ -43,7 +43,3 @@ extension NSAlert {
    }
 }
 #endif
-//if anAlert.runModal() == .alertFirstButtonReturn {
-//   return .terminateNow
-//}
-//return .terminateLater

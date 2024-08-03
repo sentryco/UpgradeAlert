@@ -5,6 +5,7 @@ import UIKit
 import Cocoa
 #endif
 /**
+ * - Description: The `UpgradeAlert` class is responsible for managing the update notification process within an application. It checks for new versions of the app on the App Store, compares it with the current version, and alerts the user if an update is necessary.
  * - Remark: What if a user doesn't want to update and there is no other option than to update?
  * - Remark: If the app always show popup when getting focus. Then activate flight-mode. Launch the app again.
  * - Remark: Title and message are optional, default values are used if nil etc
@@ -17,6 +18,7 @@ public final class UpgradeAlert {}
 extension UpgradeAlert {
    /**
     * Check for updates
+    * - Description: Initiates a check for new versions of the app available on the App Store. If a newer version is found, it prompts the user with an update alert.
     * - Remark: shows alert with one or two btns
     * - Parameter: withConfirmation You can force the update by calling, Or the user can choose if they want to update now or later by calling
     * - Remark: Version of the app you want to mark for the update. For example, 1.0.0 // This is the version you want the user to force upgrade to a newer version.
@@ -61,6 +63,7 @@ extension UpgradeAlert {
  */
 extension UpgradeAlert {
    /**
+    * - Description: Retrieves the app information from the App Store using a network request. This function fetches the JSON data from the App Store API and decodes it to `AppInfo` format, handling errors appropriately.
     * let url = URL(string: "http://www.")
     * - Remark: The url will work if the app is available for all markets. but if the app is removed from some countries. the url wont work. language code must be added etc: see: https://medium.com/usemobile/get-app-version-from-app-store-and-more-e43c5055156a
     * - Note: More url and json parsing here: https://github.com/appupgrade-dev/app-upgrade-ios-sdk/blob/main/Sources/AppUpgrade/AppUpgradeApi.swift
@@ -95,13 +98,13 @@ extension UpgradeAlert {
       task.resume()
    }
 }
-
 /**
  * Alert
  */
 extension UpgradeAlert {
    /**
     * Example code for iOS: mark with os fence
+    * - Description: Presents an alert to the user with options based on the app's update requirements. The alert informs the user about the availability of a new version and provides options to update immediately or defer the update.
     * - Remark: For macOS it coud be wise to add some comment regarding setting system-wide autoupdate to avoid future alert popups etc
     * - Remark: Can be used: "itms-apps://itunes.apple.com/app/\(appId)")
     * - Remark: "itms-apps://itunes.apple.com/app/apple-store/id375380948?mt=8"
