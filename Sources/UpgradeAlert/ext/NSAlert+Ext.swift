@@ -4,7 +4,9 @@ import Cocoa
 extension NSAlert {
    /**
     * Presents a warning alert to the user with customizable text, buttons, and completion handler.
-    * - Description: Displays a modal alert dialog on macOS with customizable titles for the buttons and a completion handler to capture the user's response.
+    * - Description: Displays a modal alert dialog on macOS with customizable
+    *                titles for the buttons and a completion handler to capture
+    *                the user's response.
     * ## Examples:
     * NSAlert.present(question: "Ok?", text: "Choose your answer.") { answer in
     *   print(answer)
@@ -15,8 +17,11 @@ extension NSAlert {
     *   - text: The informative text of the alert.
     *   - okTitle: The text for the OK button. Defaults to "OK".
     *   - cancelTitle: The text for the cancel button. Defaults to "Cancel".
-    *   - view: The view to present the alert from. If nil, the alert is presented from the first window of the application.
-    *   - complete: A closure that is called when the user dismisses the alert. The closure takes a single Boolean parameter that is true if the user clicked the OK button and false otherwise.
+    *   - view: The view to present the alert from. If nil, the alert is
+    *           presented from the first window of the application.
+    *   - complete: A closure that is called when the user dismisses the alert.
+    *               The closure takes a single Boolean parameter that is true if
+    *               the user clicked the OK button and false otherwise.
     */
    internal static func present(question: String, text: String, okTitle: String? = "OK", cancelTitle: String? = "Cancel", view: NSView? = nil, complete: ((_ answer: Bool) -> Void)?) {
       let alert: NSAlert = .init() // Initializes a new NSAlert object.

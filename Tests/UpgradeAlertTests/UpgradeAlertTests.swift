@@ -2,12 +2,14 @@ import XCTest
 @testable import UpgradeAlert
 /**
  * `UpgradeAlertTests` is a test class for the UpgradeAlert module.
- * It contains unit tests to verify the functionality of the UpgradeAlert module.
+ * - Note: It contains unit tests to verify the functionality of the UpgradeAlert module.
  */
 final class UpgradeAlertTests: XCTestCase {
    /**
     * Test parsing json from remote server
-    * - Description: This test verifies the functionality of the `checkForUpdates` method by simulating an update check and capturing the outcome.
+    * - Description: This test verifies the functionality of the
+    *                `checkForUpdates` method by simulating an update check
+    *                and capturing the outcome.
     * - Fixme: ⚠️️ Add exception handling code from NTPTime repo. This is needed to handle any exceptions that might occur while parsing the JSON.
     * - Fixme: ⚠️️ This test requires a window to run. Make sure to set up a window before running this test.
     * - remark: replace url - your url here

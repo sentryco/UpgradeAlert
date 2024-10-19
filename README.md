@@ -97,6 +97,9 @@ UpgradeAlert.showAlert(appInfo: .init(version: "1.0.1", trackViewUrl: "https://a
 - Doc params
 - Clean up comments
 - Add support for swiftui
-
-## License
-This project is licensed under the terms of the MIT license. See the [LICENSE](LICENSE) file.
+- Error Handling and Reporting: The current implementation of error handling in various parts of the codebase could be improved for better clarity and functionality. For instance: UpgradeAlert.swift: The method checkForUpdates uses a simple closure that returns an optional error. This could be enhanced by using a Result type to make the success and error handling paths clearer and more robust. 
+- UIAlertController+Ext.swift: The present method does not handle the scenario where there is no view controller available to present the alert. This could lead to silent failures in presenting critical update alerts.
+- Refactoring and Code Simplification_ Refactoring some parts of the code could improve readability and maintainability. For example: UpgradeAlert+Variables.swift: The method for generating the request URL could be simplified or made more robust by handling potential errors more gracefully.
+- NSAlert+Ext.swift: The method for presenting alerts in macOS could be refactored to reduce duplication and improve error handling.
+- Testing and Coverage Improving tests to cover edge cases and error scenarios would enhance the reliability of the application. For instance:
+- UpgradeAlertTests.swift: The test cases could be expanded to cover more scenarios, including error handling and user interaction outcomes.

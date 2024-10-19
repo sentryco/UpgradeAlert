@@ -7,18 +7,29 @@ import Foundation
  * - Note: This has version struct that compares etc: https://stackoverflow.com/questions/70964328/compare-app-versions-after-update-using-decimals-like-2-5-2/70964516#70964516
  */
 public enum ComparisonResult {
-   // The current version is the same as the App Store version.
-   // Indicates that the current version of the application is up-to-date with the version available on the App Store, requiring no action from the user.
+   /**
+    * The current version is the same as the App Store version.
+    * - Description: Indicates that the current version of the application
+    *                is up-to-date with the version available on the App Store,
+    *                requiring no action from the user.
+    */
 	case compatible
-   // The current version is older than the App Store version.
-   // Indicates that the current version of the application is older than the version available on the App Store, prompting an upgrade requirement.
+   /**
+    * The current version is older than the App Store version.
+    * - Description: Indicates that the current version of the application
+    *                is older than the version available on the App Store,
+    *                prompting an upgrade requirement.
+    */
    case requiresUpgrade
 }
 extension ComparisonResult {
 	/**
     * This function compares two version strings.
 	 * It uses the 'compare' function with 'numeric' options to compare the versions.
-    * - Description: Compares two version strings to determine the relationship between the current app version and the version available on the App Store. It returns a `ComparisonResult` indicating whether the versions are compatible or an upgrade is required.
+    * - Description: Compares two version strings to determine the relationship
+    *                between the current app version and the version available on
+    *                the App Store. It returns a `ComparisonResult` indicating
+    *                whether the versions are compatible or an upgrade is required.
 	 * - Note: from here: https://stackoverflow.com/a/55141421/5389500
 	 * - Remark: Sample does not cover versions with extra zeros.(Ex: "1.0.0" & "1.0")
 	 * - Note: Handles more cases: https://github.com/DragonCherry/VersionCompare

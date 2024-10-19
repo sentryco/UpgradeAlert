@@ -55,7 +55,10 @@ extension UAConfig {
    /**
     * Provides a default configuration for the alert.
     * This can be used when no specific configuration is provided.
-    * - Description: Returns a default `UAConfig` instance with predefined values for alert title, message, and button titles, suitable for general use cases where a specific configuration is not necessary.
+    * - Description: Returns a default `UAConfig` instance with predefined
+    *                values for alert title, message, and button titles,
+    *                suitable for general use cases where a specific
+    *                configuration is not necessary.
     */
    public static let defaultConfig: UAConfig = {
       .init(

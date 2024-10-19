@@ -4,7 +4,9 @@ import UIKit
 extension UIAlertController {
    /**
     * Present alert
-    * - Description: Presents the alert controller modally on the currently active view controller or the root view controller if no other controllers are presented.
+    * - Description: Presents the alert controller modally on the currently
+    *                active view controller or the root view controller if no other
+    *                controllers are presented.
     * Fix: throw error if vc is not available?
     */
    internal func present() {
@@ -17,7 +19,9 @@ extension UIAlertController {
 extension UIAlertController {
    /**
     * Presented or root view-controller
-    * - Description: Retrieves the currently presented view controller or the root view controller if no other view controller is presented.
+    * - Description: Retrieves the currently presented view controller or the
+    *                root view controller if no other view controller is
+    *                presented.
     * - Note: Sometimes there is no vc: https://stackoverflow.com/a/30509569/5389500
     */
    fileprivate static var presentedOrRootVC: UIViewController? {

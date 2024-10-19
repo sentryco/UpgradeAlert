@@ -5,7 +5,10 @@ import UIKit
 import Cocoa
 #endif
 /**
- * - Description: The `UpgradeAlert` class is responsible for managing the update notification process within an application. It checks for new versions of the app on the App Store, compares it with the current version, and alerts the user if an update is necessary.
+ * - Description: The `UpgradeAlert` class manages the update notification
+ *                process within an application. It checks for new versions of
+ *                the app on the App Store, compares it with the current
+ *                version, and alerts the user if an update is necessary.
  * - Remark: What if a user doesn't want to update and there is no other option than to update?
  * - Remark: If the app always show popup when getting focus. Then activate flight-mode. Launch the app again.
  * - Remark: Title and message are optional, default values are used if nil etc
@@ -18,13 +21,21 @@ public final class UpgradeAlert {}
 extension UpgradeAlert {
    /**
     * Check for updates
-    * - Description: Initiates a check for new versions of the app available on the App Store. If a newer version is found, it prompts the user with an update alert.
+    * - Description: Initiates a check for new versions of the app available
+    *                on the App Store. If a newer version is found, it prompts
+    *                the user with an update alert.
     * - Remark: shows alert with one or two btns
-    * - Parameter: withConfirmation You can force the update by calling, Or the user can choose if they want to update now or later by calling
-    * - Remark: Version of the app you want to mark for the update. For example, 1.0.0 // This is the version you want the user to force upgrade to a newer version.
+    * - Remark: Version of the app you want to mark for the update.
+    *           For example, 1.0.0 // This is the version you want the user
+    *           to force upgrade to a newer version.
     * - Fixme: ⚠️️ Add onAppStoreOpenComplete -> ability to track how many update etc
     * - Fixme: ⚠️️ Use Result instead etc
-    * - Parameter complete: A closure that is called when the update check is complete. It returns an optional AppInfo object and an optional NSError object. If an error occurs during the update check, the NSError object describes the error. If the update check is successful, the AppInfo object contains information about the app.
+    * - Parameter complete: A closure that is called when the update check
+    *                       is complete. It returns an optional AppInfo object
+    *                       and an optional NSError object. If an error occurs
+    *                       during the update check, the NSError object describes
+    *                       the error. If the update check is successful, the
+    *                       AppInfo object contains information about the app.
     */
 	public static func checkForUpdates(complete: Complete? = defaultComplete) { // complete: (_ appInfo: AppInfo?, error: NSError?)
 		// Perform network calls on a background thread

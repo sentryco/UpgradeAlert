@@ -30,7 +30,9 @@ extension Bundle {
    /**
     * Tests if an app is in beta
     * - Abstract: determines if beta from receipt
-    * - Description: Determines if the application is a beta version by checking the app store receipt URL for specific substrings that identify simulator or TestFlight environments.
+    * - Description: Determines if the application is a beta version by
+    *               checking the app store receipt URL for specific substrings that
+    *               identify simulator or TestFlight environments.
     * - Note: From here: https://stackoverflow.com/a/38984554/5389500
     * - Note: More complex example: https://stackoverflow.com/a/33830605/5389500
     * - Note: Another example: https://stackoverflow.com/a/59047187/5389500
