@@ -1,10 +1,10 @@
-// swift-tools-version: 5.6
+// swift-tools-version: 5.9
 
 import PackageDescription
 
 let package = Package(
     name: "UpgradeAlert", // Set the name of the package
-    platforms: [.iOS(.v15), .macOS(.v12)], // Set the supported platforms
+    platforms: [.iOS(.v17), .macOS(.v14)], // Set the supported platforms
     products: [
         .library(
             name: "UpgradeAlert", // Set the name of the library

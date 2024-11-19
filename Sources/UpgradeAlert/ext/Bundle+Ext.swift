@@ -40,7 +40,8 @@ extension Bundle {
     * - Note: If it fails there might be a fix here: https://stackoverflow.com/a/52232267/5389500
     * - Note: Seems like this can determine if an app is beta: https://developer.apple.com/documentation/appstoreconnectapi/list_all_builds_of_an_app
     * - Fixme: ⚠️️  Here is code that checks if something is testflight: https://gist.github.com/lukaskubanek/cbfcab29c0c93e0e9e0a16ab09586996
-    * fix. we could make BundleError enum BundleError: Error { case appStoreReceiptURLNotFound }
+    * - Fixme: ⚠️️ 'appStoreReceiptURL' was deprecated in macOS 15.0: Use AppTransaction.shared and Transaction.all from StoreKit.framework instead
+    * - Fixme: ⚠️️ We could make BundleError enum BundleError: Error { case appStoreReceiptURLNotFound }
     * Example: `let isBeta = Bundle.isBeta`
     */
    public static var isBeta: Bool { // was named: isSimulatorOrTestFlight

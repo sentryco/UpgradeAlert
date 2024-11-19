@@ -60,7 +60,7 @@ extension UAConfig {
     *                suitable for general use cases where a specific
     *                configuration is not necessary.
     */
-   public static let defaultConfig: UAConfig = {
+   public static var defaultConfig: UAConfig {
       .init(
          isRequired: false, // By default, upgrades are not mandatory.
          alertTitle: "Update available", // Default alert title.
@@ -76,5 +76,5 @@ extension UAConfig {
          laterButtonTitle: "Later", // Default 'Later' button title.
          updateButtonTitle: "Update Now" // Default 'Update' button title.
       )
-   }()
+   }
 }

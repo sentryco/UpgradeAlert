@@ -103,3 +103,4 @@ UpgradeAlert.showAlert(appInfo: .init(version: "1.0.1", trackViewUrl: "https://a
 - NSAlert+Ext.swift: The method for presenting alerts in macOS could be refactored to reduce duplication and improve error handling.
 - Testing and Coverage Improving tests to cover edge cases and error scenarios would enhance the reliability of the application. For instance:
 - UpgradeAlertTests.swift: The test cases could be expanded to cover more scenarios, including error handling and user interaction outcomes.
+- Upgrade this to Swift 6.0 (Might be a bit tricky)

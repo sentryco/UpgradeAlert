@@ -52,8 +52,10 @@ extension UpgradeAlert {
     *                observe the results of the update check or alert
     *                interaction.
     */
-   public static let defaultComplete: Complete = { (outcome: UAOutcome) in
-      Swift.print("default complete - outcome: \(String(describing: outcome))")
+   public static var defaultComplete: Complete {
+      { (outcome: UAOutcome) in
+         Swift.print("default complete - outcome: \(String(describing: outcome))")
+      }
    }
 }
 /**
@@ -66,5 +68,5 @@ extension UpgradeAlert {
     *                system, which can be customized as needed.
     * - Note: By default, it uses the default configuration defined in UAConfig.
     */
-   public static var config: UAConfig = .defaultConfig
+   public static var config: UAConfig { .defaultConfig }
 }
