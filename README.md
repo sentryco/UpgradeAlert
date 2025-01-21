@@ -19,20 +19,20 @@
 - [License](#license)
 
 ### Problem:
-- 🖥 macOS app does not auto update by default, unless user has set this specifically in app-store.
-- 📲 iOS auto update by default, but a few might have turned it off.
-- 🕸 Users might be stuck on old OS. that we no longer support. In that case we need to "soft-brick" the app
-- 🪦 Supporting 6+ month old app versions in your backend
+- 🖥 macOS apps do not auto-update by default unless the user has enabled this in the App Store settings.
+- 📲 While iOS apps auto-update by default, some users may have disabled this feature.
+- 🕸 Users may be stuck on an old OS version that is no longer supported.
+- 🪦 Supporting outdated app versions can burden your backend and complicate code maintenance.
 - 🥶 Supporting multiple versions of your app you will result in bloated app code that is hard to iterate on
-- 🤬 Users will stop complaining about issues that are already fixed in the last update
-- 🥵 Users will stop giving bad reviews because of errors with old software
-- 🔥 Avoid crashes by staying compatible with the latest device API changes and platform updates
-- 🚨 Getting urgent security updates out to as many users as possible as quickly as possible
+- 🤬 Users may complain about issues already fixed in newer versions.
+- 🥵 Outdated apps may lead to negative reviews due to bugs that have been resolved.
+- 🔥 Avoid crashes by ensuring compatibility with the latest device APIs and platform updates.
+- 🚨 Deliver urgent security updates to users promptly.
 
 ### Solution:
-- When the current app version is outdated. The user is prompted with a link to AppStore where the user can update
-- Two different alerts can be prompted. One where there is an option to update later and one where the user required to update
-- You can customize alert title, message and button text
+- When the current app version is outdated, the user is prompted with a link to the App Store to update.
+- Two different alerts can be displayed: one where the user has the option to update later, and one where the update is mandatory.
+- You can customize the alert title, message, and button texts.
 
 > **Warning**  
 > Setting `isRequired = true` bricks the app until it's updated
@@ -51,20 +51,33 @@
 ```swift
 import UpgradeAlert
 
-guard Bundle.isBeta else { Swift.print("App is beta or simulator, skip checking for update"); return }
-UpgradeAlert.config = UAConfig( // Config the alert
-   isRequired: false, // Require users to update
-   alertTitle: "Update required", // alert title
-   alertMessage: { version in "Version: \(version) is out!" }, // alert msg
-   laterButtonTitle: "Later", // skip button title
-   updateButtonTitle: "Update Now" // go to appstore btn
+// Skip checking for updates if the app is running in beta (e.g., simulator or TestFlight)
+guard !Bundle.isBeta else {
+    Swift.print("App is beta or simulator, skip checking for update")
+    return
+}
+
+// Configure the alert
+UpgradeAlert.config = UAConfig(
+    isRequired: false, // Require users to update
+    alertTitle: "Update required", // Alert title
+    alertMessage: { appName, version in "Version \(version) is out!" }, // Alert message
+    laterButtonTitle: "Later", // Skip button title
+    updateButtonTitle: "Update Now" // Go to App Store button
 )
-UpgradeAlert.checkForUpdates { outcome in // check apple endpoint if there is a new update
-   if case .err(let err) = outcome {
-      Swift.print("Err: \(err.localizedDescription)")
-   } else { // opportunity to track user action here with GA etc
-      swift.print("Outcome: \(String(describing: outcome))") // notNow, notNeeded, appStoreOpened
-   }
+
+// Check Apple endpoint to see if there is a new update
+UpgradeAlert.checkForUpdates { outcome in
+    switch outcome {
+    case .error(let error):
+        Swift.print("Error: \(error.localizedDescription)")
+    case .notNow:
+        Swift.print("User chose to update later.")
+    case .updateNotNeeded:
+        Swift.print("App is up-to-date.")
+    case .didOpenAppStoreToUpdate:
+        Swift.print("Redirected user to App Store for update.")
+    }
 }
 ```
 **For debugging**
@@ -75,14 +88,35 @@ UpgradeAlert.showAlert(appInfo: .init(version: "1.0.1", trackViewUrl: "https://a
 ```
 
 ### FAQ:
+
 **Q:** What is an Upgrade-Wall?  
-**A:** Upgrade-Wall or Update-Wall is a system/service that prevents mobile app users from using the app who are still using the older versions of the app.
+**A:** An **Upgrade-Wall** (or **Update-Wall**) is a system that prevents mobile app users from using the app if they are still on older versions. It ensures that all users operate on the latest version of the app.
 
-**Q:** Why do we need Upgrade-Wall?  
-**A:** A required upgrade may be required when there are breaking changes in the backend API which will result in an app crash or when there are security issues in older apps and a new version of the app is released and you may want to require users to update to the newly released version. Also in cases where you want to encourage users to update your app to the newly released versions because you have launched a new cool feature and want users to explore and use it. In these scenarios, Upgrade-Wall is necessary to have in place.
+**Q:** Why do we need an Upgrade-Wall?  
+**A:** An Upgrade-Wall is necessary when you need users to update to a new version due to breaking changes, security issues, or to promote new features. For instance:
 
-**Q:** How to Implement Upgrade-Wall?  
-**A:** Upgrade-Wall can be implemented with two strategies, hard and soft Upgrade-Walls. A Hard Upgrade-Wall completely restricts the users from using the app and requires them to update the app. A Soft Upgrade-Wall offers greater flexibility to users, generally giving users the freedom to either update the app or skip the update to a later time. Both the strategies can be implemented by showing a popup/alert to users. When the user opens the app, Hard Upgrade-Wall will show a non-dismissible popup with only an update button. Users cannot skip the popup and will have only one option to update the app. On pressing the update button the app should open the play store or AppStore of the app from where the user can update the app to the latest version. Soft Upgrade-Wall will show a dismissible popup to the user with options to either update the app or skip. Users can skip and continue using the app. An example of Hard Upgrade-Wall and Soft Upgrade-Wall. You can skip the pain of building an Upgrade-Wall yourself and use solutions which are already there.
+- **Breaking Changes:** If there are significant changes in the backend API that would cause older versions of the app to crash.
+- **Security Issues:** When older app versions have vulnerabilities that are fixed in newer releases.
+- **Feature Promotion:** To encourage users to experience new features you've introduced.
+
+In these scenarios, an Upgrade-Wall ensures users update to the latest version, providing a consistent and secure experience.
+
+**Q:** How do you implement an Upgrade-Wall?  
+**A:** An Upgrade-Wall can be implemented using two strategies: **hard** and **soft** Upgrade-Walls.
+
+- **Hard Upgrade-Wall:** Completely restricts users from using the app until they update.
+
+  - Displays a non-dismissible popup with only an **Update** button when the app is opened.
+  - Users cannot skip this popup and must update to continue.
+  - Pressing the **Update** button redirects to the App Store or Play Store to download the latest version.
+
+- **Soft Upgrade-Wall:** Offers flexibility, allowing users to choose whether to update immediately or later.
+
+  - Shows a dismissible popup with options to **Update** or **Skip**.
+  - Users can skip the update and continue using the app.
+  - Encourages but does not force the update.
+
+Both strategies involve showing a popup or alert to users upon opening the app. You can streamline this process by utilizing existing solutions that provide Upgrade-Wall functionality.
 
 ### Gotchas:
 - For macOS `applicationDidBecomeActive` will be called after dismissing the UpgradeAlert, make sure you init UpgradeAlert from another method or else it will create an inescapable loop. This does not apply for iOS.
@@ -109,7 +143,7 @@ UpgradeAlert.showAlert(appInfo: .init(version: "1.0.1", trackViewUrl: "https://a
 Issue: The current implementation of asynchronous methods uses custom closures with optional parameters for error handling. This can be improved by leveraging Swift's Result type, which provides a clearer and more structured way to handle success and failure cases.
 Improvement: Refactor asynchronous methods to use Result instead of optional parameters. This will make the code more readable and maintainable.
 
-```
+```swift
 public final class UpgradeAlert {
     public static func checkForUpdates(completion: @escaping (Result<Void, UAError>) -> Void) {
         DispatchQueue.global(qos: .background).async {
@@ -171,3 +205,58 @@ private static func getAppInfo(completion: @escaping (Result<AppInfo, UAError>) 
 }
 ```
 
+- Improve NSAlert Presentation
+Issue: In NSAlert+Ext.swift, the code can be refactored to reduce duplication and handle more cases.
+Improvement: Create a general method to 
+
+```swift
+extension NSAlert {
+    internal static func present(
+        messageText: String,
+        informativeText: String,
+        style: NSAlert.Style,
+        buttons: [String],
+        completion: ((NSApplication.ModalResponse) -> Void)? = nil
+    ) {
+        let alert = NSAlert()
+        alert.messageText = messageText
+        alert.informativeText = informativeText
+        alert.alertStyle = style
+        buttons.forEach { alert.addButton(withTitle: $0) }
+        if let window = NSApplication.shared.windows.first {
+            alert.beginSheetModal(for: window, completionHandler: completion)
+        } else {
+            print("Error: No window available to present alert.")
+        }
+    }
+}
+```
+- Add Support for SwiftUI Alerts
+Issue: The current implementation does not support SwiftUI, limiting its use in SwiftUI-based apps.
+Improvement: Add methods to present alerts using SwiftUI.
+Example Implementation:
+
+```swift
+import SwiftUI
+
+@available(iOS 13.0, macOS 10.15, *)
+public struct UpgradeAlertView: View {
+    @State private var isPresented = false
+    public var body: some View {
+        Text("") // Placeholder
+            .alert(isPresented: $isPresented) {
+                Alert(
+                    title: Text(config.alertTitle),
+                    message: Text(config.alertMessage(nil, appInfo.version)),
+                    primaryButton: .default(Text(config.updateButtonTitle), action: {
+                        // Handle update action
+                    }),
+                    secondaryButton: config.isRequired ? nil : .cancel(Text(config.laterButtonTitle))
+                )
+            }
+            .onAppear {
+                isPresented = true
+            }
+    }
+}
+```
