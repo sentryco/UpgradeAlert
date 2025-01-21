@@ -30,6 +30,8 @@ public struct AppInfo: Decodable {
     *                review the app.
     */
    public let trackViewUrl: String
+   // ⚠️️ new
+    public let currentVersionReleaseDate: String
    /**
     * Initializes a new instance of `AppInfo`.
     * - Description: Initializes a new instance of `AppInfo` with the specified

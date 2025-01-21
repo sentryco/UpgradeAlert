@@ -38,18 +38,23 @@ extension ComparisonResult {
     *   - appStore: "1.2.9" The version of the app in the App Store.
     */
    static func compareVersion(current: String, appStore: String) -> ComparisonResult {
-   	let versionCompare/*: ComparisonResult*/ = current.compare(appStore, options: .numeric)
-      switch versionCompare {
-      case .orderedSame:// The current version is the same as the App Store version.
-         //print("same version")
-         return .compatible
-      case .orderedAscending:// The current version is older than the App Store version.
-         // will execute the code here
-         // print("ask user to update")
-         return .requiresUpgrade
-      case .orderedDescending: // app-store listing hasn't updated yet, The current version is newer than the App Store version. This is an unexpected case.
-         // execute if current > appStore
-         // print("don't expect happen...")
+   //	let versionCompare/*: ComparisonResult*/ = current.compare(appStore, options: .numeric)
+   //   switch versionCompare {
+   //   case .orderedSame:// The current version is the same as the App Store version.
+   //      //print("same version")
+   //      return .compatible
+   //   case .orderedAscending:// The current version is older than the App Store version.
+   //      // will execute the code here
+   //      // print("ask user to update")
+   //      return .requiresUpgrade
+   //   case .orderedDescending: // app-store listing hasn't updated yet, The current version is newer than the App Store version. This is an unexpected case.
+   //      // execute if current > appStore
+   //      // print("don't expect happen...")
+   //      return .compatible
+   //   }
+      if current.compare(appStore, options: .numeric) == .orderedAscending {
+            return .requiresUpgrade
+      } else {
          return .compatible
       }
    }

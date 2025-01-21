@@ -10,7 +10,11 @@ extension UIAlertController {
     * Fix: throw error if vc is not available?
     */
    internal func present() {
-      Self.presentedOrRootVC?.present(self, animated: true, completion: nil)
+       guard let viewController = Self.presentedOrRootVC else {
+         print("Error: No view controller available to present the alert.")
+         return
+      }
+      viewController.present(self, animated: true, completion: nil)
    }
 }
 /**

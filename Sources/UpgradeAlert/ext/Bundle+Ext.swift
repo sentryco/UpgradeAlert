@@ -8,25 +8,33 @@ extension Bundle {
     * - Description: Retrieves the name of the main bundle of the application.
     * Example: `let appName = Bundle.name`
     */
-   internal static let name: String? = Bundle.main.object(forInfoDictionaryKey: kCFBundleNameKey as String) as? String
+   internal static var name: String? {
+        main.object(forInfoDictionaryKey: kCFBundleNameKey as String) as? String
+   }
    /**
     * The version of the main bundle.
     * - Description: Retrieves the version number of the main bundle of the application.
     * Example: `let appVersion = Bundle.version`
     */
-   internal static let version: String? = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+   internal static var version: String? {
+        main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+   }
    /**
     * The build number of the main bundle.
     * - Description: Retrieves the build number of the main bundle of the application.
     * Example: `let buildNumber = Bundle.build`
     */
-   internal static let build: String? = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String
+   internal static var build: String? {
+        main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String
+   }
    /**
     * The identifier of the main bundle.
     * - Description: Retrieves the unique identifier of the main bundle of the application.
     * Example: `let bundleIdentifier = Bundle.identifier`
     */
-   internal static let identifier: String? = Bundle.main.object(forInfoDictionaryKey: kCFBundleIdentifierKey as String) as? String
+   internal static var identifier: String? {
+        main.object(forInfoDictionaryKey: kCFBundleIdentifierKey as String) as? String
+   }
    /**
     * Tests if an app is in beta
     * - Abstract: determines if beta from receipt

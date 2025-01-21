@@ -30,4 +30,23 @@ final class UpgradeAlertTests: XCTestCase {
          }
       }
    }
+   // ⚠️️ untested
+   func testGetAppInfoWithInvalidURL() {
+      // Temporarily override the requestURL to be invalid
+      let originalURL = UpgradeAlert.requestURL
+      UpgradeAlert.requestURL = nil
+      let expectation = self.expectation(description: "Completion handler called")
+      UpgradeAlert.getAppInfo { result in
+         switch result {
+         case .success:
+               XCTFail("Expected failure when URL is invalid")
+         case .failure(let error):
+               XCTAssertEqual(error, .invalidURL)
+         }
+         expectation.fulfill()
+      }
+      waitForExpectations(timeout: 5, handler: nil)
+      // Restore the original URL
+      UpgradeAlert.requestURL = originalURL
+   }
 }

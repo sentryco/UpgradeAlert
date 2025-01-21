@@ -104,3 +104,70 @@ UpgradeAlert.showAlert(appInfo: .init(version: "1.0.1", trackViewUrl: "https://a
 - Testing and Coverage Improving tests to cover edge cases and error scenarios would enhance the reliability of the application. For instance:
 - UpgradeAlertTests.swift: The test cases could be expanded to cover more scenarios, including error handling and user interaction outcomes.
 - Upgrade this to Swift 6.0 (Might be a bit tricky)
+- Add a way to inject text for alert. so we can localize text from the caller etc.as we might want to use .modules with localizations etc
+- Enhance Error Handling with Swift's Result Type
+Issue: The current implementation of asynchronous methods uses custom closures with optional parameters for error handling. This can be improved by leveraging Swift's Result type, which provides a clearer and more structured way to handle success and failure cases.
+Improvement: Refactor asynchronous methods to use Result instead of optional parameters. This will make the code more readable and maintainable.
+
+```
+public final class UpgradeAlert {
+    public static func checkForUpdates(completion: @escaping (Result<Void, UAError>) -> Void) {
+        DispatchQueue.global(qos: .background).async {
+            getAppInfo { result in
+                switch result {
+                case .success(let appInfo):
+                    let needsUpdate = ComparisonResult.compareVersion(
+                        current: Bundle.version ?? "0",
+                        appStore: appInfo.version
+                    ) == .requiresUpgrade
+                    guard needsUpdate else {
+                        completion(.success(()))
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        showAlert(appInfo: appInfo, completion: completion)
+                    }
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+}
+```
+
+- Use Result in getAppInfo Method
+Issue: The getAppInfo method currently uses a closure with optional parameters for error handling.
+Improvement: Modify getAppInfo to use Result<AppInfo, UAError> in its completion handler.
+Updated Code:
+
+```swift
+private static func getAppInfo(completion: @escaping (Result<AppInfo, UAError>) -> Void) {
+    guard let url = requestURL else {
+        completion(.failure(.invalidURL))
+        return
+    }
+    let task = URLSession.shared.dataTask(with: url) { data, _, error in
+        if let error = error {
+            completion(.failure(.invalidResponse(description: error.localizedDescription)))
+            return
+        }
+        guard let data = data else {
+            completion(.failure(.invalidResponse(description: "No data received")))
+            return
+        }
+        do {
+            let result = try JSONDecoder().decode(LookupResult.self, from: data)
+            if let appInfo = result.results.first {
+                completion(.success(appInfo))
+            } else {
+                completion(.failure(.invalidResponse(description: "No app info available")))
+            }
+        } catch {
+            completion(.failure(.invalidResponse(description: error.localizedDescription)))
+        }
+    }
+    task.resume()
+}
+```
+

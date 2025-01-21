@@ -100,6 +100,19 @@ extension UpgradeAlert {
 
                throw NSError(domain: "no app info", code: 0) // If there is no app info, throw an NSError with the description "no app info"
             }
+
+            // ⚠️️ new
+            // The App Store metadata may be updated before the app binary is available, causing users to see an update prompt before they can download the update.
+            // Check the currentVersionReleaseDate from the App Store response and delay prompting users if the update is very recent.
+            let dateFormatter = ISO8601DateFormatter()
+            if let releaseDate = dateFormatter.date(from: appInfo.currentVersionReleaseDate) {
+               let daysSinceRelease = Calendar.current.dateComponents([.day], from: releaseDate, to: Date()).day ?? 0
+               if daysSinceRelease < 1 {
+                     completion(.success(())) // Do not prompt the user yet
+                     return
+               }
+            }
+
             completion?(info, nil)
          } catch {
             // Handle potential errors during data fetching and decoding

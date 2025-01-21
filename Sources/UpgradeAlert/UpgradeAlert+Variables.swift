@@ -14,10 +14,18 @@ extension UpgradeAlert {
     * - Fixme: ⚠️️ Consider renaming this to appInfoRequestURL for clarity.
     * - fix: maybe move url to const?
     */
+    @available(*, deprecated, renamed: "getRequestURL")
    internal static var requestURL: URL? {
       guard let bundleId: String = Bundle.identifier else { return nil }
       let requestURLStr: String = "https://itunes.apple.com/lookup?bundleId=\(bundleId)" // might need country code
       return .init(string: requestURLStr)
+   }
+   // The App Store lookup URL may fail if the app is not available in all countries.
+   // prefer this
+   internal static var getRequestURL(countryCode = Locale.current.regionCode ?? "US") -> URL? {
+      guard let bundleId = Bundle.identifier else { return nil }
+      let requestURLStr = "https://itunes.apple.com/lookup?bundleId=\(bundleId)&country=\(countryCode)"
+      return URL(string: requestURLStr)
    }
 }
 /**
