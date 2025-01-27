@@ -31,6 +31,7 @@ public struct AppInfo: Decodable {
     */
    public let trackViewUrl: String
    // ⚠️️ new
+   // fixme: add doc
     public let currentVersionReleaseDate: String
    /**
     * Initializes a new instance of `AppInfo`.
@@ -40,8 +41,9 @@ public struct AppInfo: Decodable {
     *   - version: The current version of the application.
     *   - trackViewUrl: The URL to the application's page on the App Store.
     */
-   public init(version: String, trackViewUrl: String) {
+   public init(version: String, trackViewUrl: String, currentVersionReleaseDate: String) {
       self.version = version
       self.trackViewUrl = trackViewUrl
+      self.currentVersionReleaseDate = currentVersionReleaseDate
    }
 }

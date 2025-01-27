@@ -68,11 +68,14 @@ extension UpgradeAlert {
 		}
 	}
 }
-
 /**
  * Network
  */
 extension UpgradeAlert {
+   /**
+    * fixme: add doc
+    */
+   typealias Completion = (AppInfo?, UAError?) -> Void
    /**
     * - Description: Retrieves the app information from the App Store using a network request. This function fetches the JSON data from the App Store API and decodes it to `AppInfo` format, handling errors appropriately.
     * let url = URL(string: "http://www.")
@@ -82,11 +85,11 @@ extension UpgradeAlert {
     * - Note: Discussing this solution: https://stackoverflow.com/questions/6256748/check-if-my-app-has-a-new-version-on-appstore
     * - Fixme: ⚠️️ Add timeout interval and local cache pollacy: https://github.com/amebalabs/AppVersion/blob/master/AppVersion/Source/AppStoreVersion.swift
     * - Parameter completion: A closure that is called when the app information retrieval is complete. It returns an optional AppInfo object and an optional UAError object. If an error occurs during the retrieval, the UAError object describes the error. If the retrieval is successful, the AppInfo object contains information about the app.
-     - Fixme: ⚠️ make alias for type
+    * - Fixme: ⚠️ make alias for type
     */
-   private static func getAppInfo(completion: ((AppInfo?, UAError?) -> Void)?) { /*urlStr: String, */
+   private static func getAppInfo(completion: Completion?) { /*urlStr: String, */
       // Check if the request URL is valid
-      guard let url: URL = requestURL else { completion?(nil, UAError.invalideURL); return }
+      guard let url: URL = getRequestURL() else { completion?(nil, UAError.invalideURL); return }
       // Create a data task to fetch app information
       let task = URLSession.shared.dataTask(with: url) { data, _, error in
          do {
@@ -97,22 +100,19 @@ extension UpgradeAlert {
             }
             let result = try JSONDecoder().decode(LookupResult.self, from: data)
             guard let info: AppInfo = result.results.first else { // Get the first app info from the result
-
                throw NSError(domain: "no app info", code: 0) // If there is no app info, throw an NSError with the description "no app info"
             }
-
             // ⚠️️ new
             // The App Store metadata may be updated before the app binary is available, causing users to see an update prompt before they can download the update.
             // Check the currentVersionReleaseDate from the App Store response and delay prompting users if the update is very recent.
             let dateFormatter = ISO8601DateFormatter()
-            if let releaseDate = dateFormatter.date(from: appInfo.currentVersionReleaseDate) {
+            if let releaseDate = dateFormatter.date(from: info.currentVersionReleaseDate) {
                let daysSinceRelease = Calendar.current.dateComponents([.day], from: releaseDate, to: Date()).day ?? 0
                if daysSinceRelease < 1 {
-                     completion(.success(())) // Do not prompt the user yet
+                     completion?(info, nil) // Do not prompt the user yet
                      return
                }
             }
-
             completion?(info, nil)
          } catch {
             // Handle potential errors during data fetching and decoding

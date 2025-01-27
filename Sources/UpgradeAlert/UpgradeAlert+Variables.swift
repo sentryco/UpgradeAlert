@@ -22,7 +22,7 @@ extension UpgradeAlert {
    }
    // The App Store lookup URL may fail if the app is not available in all countries.
    // prefer this
-   internal static var getRequestURL(countryCode = Locale.current.regionCode ?? "US") -> URL? {
+   internal static func getRequestURL(countryCode: String = Locale.current.region?.identifier ?? "US") -> URL? {
       guard let bundleId = Bundle.identifier else { return nil }
       let requestURLStr = "https://itunes.apple.com/lookup?bundleId=\(bundleId)&country=\(countryCode)"
       return URL(string: requestURLStr)
