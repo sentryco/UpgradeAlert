@@ -81,7 +81,6 @@ extension UpgradeAlert {
     * - Remark: This typealias simplifies the signature of completion handlers used in asynchronous network operations within the `UpgradeAlert` module.
     */
    typealias Completion = (AppInfo?, UAError?) -> Void
-   typealias Completion = (AppInfo?, UAError?) -> Void
    /**
     * - Description: Retrieves the app information from the App Store using a network request. This function fetches the JSON data from the App Store API and decodes it to `AppInfo` format, handling errors appropriately.
     * let url = URL(string: "http://www.")
