@@ -73,8 +73,14 @@ extension UpgradeAlert {
  */
 extension UpgradeAlert {
    /**
-    * fixme: add doc
+    * A typealias for the completion handler used in network calls to fetch `AppInfo`.
+    * - Description: This completion handler is invoked after attempting to fetch app information from the App Store. It provides either the `AppInfo` object upon success or a `UAError` if an error occurred during the fetch operation.
+    * - Parameters:
+    *   - AppInfo?: An optional `AppInfo` object containing the app's metadata retrieved from the App Store.
+    *   - UAError?: An optional `UAError` describing any error encountered during the network request.
+    * - Remark: This typealias simplifies the signature of completion handlers used in asynchronous network operations within the `UpgradeAlert` module.
     */
+   typealias Completion = (AppInfo?, UAError?) -> Void
    typealias Completion = (AppInfo?, UAError?) -> Void
    /**
     * - Description: Retrieves the app information from the App Store using a network request. This function fetches the JSON data from the App Store API and decodes it to `AppInfo` format, handling errors appropriately.

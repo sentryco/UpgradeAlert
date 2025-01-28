@@ -31,7 +31,10 @@ public struct AppInfo: Decodable {
     */
    public let trackViewUrl: String
    // ⚠️️ new
-   // fixme: add doc
+   /**
+    * The release date of the current version of the application.
+    * - Description: Specifies the date when the current version of the application was released on the App Store, represented as a string. This information is used to determine if the app was released recently and to adjust update prompts accordingly.
+    */
     public let currentVersionReleaseDate: String
    /**
     * Initializes a new instance of `AppInfo`.
