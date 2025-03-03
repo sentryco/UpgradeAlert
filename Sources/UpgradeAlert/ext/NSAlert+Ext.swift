@@ -23,7 +23,14 @@ extension NSAlert {
     *               The closure takes a single Boolean parameter that is true if
     *               the user clicked the OK button and false otherwise.
     */
-   internal static func present(question: String, text: String, okTitle: String? = "OK", cancelTitle: String? = "Cancel", view: NSView? = nil, complete: ((_ answer: Bool) -> Void)?) {
+   internal static func present(
+      question: String,
+      text: String,
+      okTitle: String? = "OK",
+      cancelTitle: String? = "Cancel",
+      view: NSView? = nil,
+      complete: ((_ answer: Bool) -> Void)?
+   ) {
       let alert: NSAlert = .init() // Initializes a new NSAlert object.
       alert.messageText = question // Sets the primary message text of the alert.
       alert.informativeText = text // Sets the secondary, informative text of the alert.

@@ -44,7 +44,11 @@ public struct AppInfo: Decodable {
     *   - version: The current version of the application.
     *   - trackViewUrl: The URL to the application's page on the App Store.
     */
-   public init(version: String, trackViewUrl: String, currentVersionReleaseDate: String) {
+   public init(
+      version: String,
+      trackViewUrl: String,
+      currentVersionReleaseDate: String
+   ) {
       self.version = version
       self.trackViewUrl = trackViewUrl
       self.currentVersionReleaseDate = currentVersionReleaseDate

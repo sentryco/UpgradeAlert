@@ -40,7 +40,13 @@ public struct UAConfig {
     *   - laterButtonTitle: The title of the 'Later' button.
     *   - updateButtonTitle: The title of the 'Update' button.
     */
-   public init(isRequired: Bool, alertTitle: String, alertMessage: @escaping UpgradeAlert.AlertMessage, laterButtonTitle: String, updateButtonTitle: String) {
+   public init(
+      isRequired: Bool,
+      alertTitle: String,
+      alertMessage: @escaping UpgradeAlert.AlertMessage,
+      laterButtonTitle: String,
+      updateButtonTitle: String
+   ) {
       self.isRequired = isRequired
       self.alertTitle = alertTitle
       self.alertMessage = alertMessage
